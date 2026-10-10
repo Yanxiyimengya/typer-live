@@ -1,0 +1,355 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/scenes/editor/settings/style_box_editor.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/icons/reset.svg" id="2_reset"]
+
+[sub_resource type="StyleBoxFlat" id="ColorButton"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.57, 0.57, 0.57, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_left = 5
+corner_radius_bottom_right = 5
+
+[node name="StyleBoxEditor" type="VBoxContainer"]
+custom_minimum_size = Vector2(360, 0)
+theme_override_constants/separation = 10
+script = ExtResource("1_script")
+
+[node name="Header" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="ModeButton" type="OptionButton" parent="Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 3
+popup/item_0/text = "Flat · 纯色样式"
+popup/item_0/id = 0
+popup/item_1/text = "空 · 无背景"
+popup/item_1/id = 1
+popup/item_2/text = "图像纹理 · 九宫格"
+popup/item_2/id = 2
+
+[node name="ResetStyleButton" type="Button" parent="Header"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "还原此对象的默认样式"
+theme_override_constants/icon_max_width = 20
+icon = ExtResource("2_reset")
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Fields" type="VBoxContainer" parent="Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="FlatFields" type="VBoxContainer" parent="Scroll/Fields"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="BackgroundPickerRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/BackgroundPickerRow"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "背景颜色"
+
+[node name="BackgroundPicker" type="ColorPickerButton" parent="Scroll/Fields/FlatFields/BackgroundPickerRow"]
+unique_name_in_owner = true
+layout_mode = 2
+metadata/style_key = "background"
+custom_minimum_size = Vector2(72, 30)
+color = Color(0.20, 0.13, 0.25, 0.96)
+theme_override_styles/normal = SubResource("ColorButton")
+theme_override_styles/hover = SubResource("ColorButton")
+theme_override_styles/pressed = SubResource("ColorButton")
+theme_override_styles/hover_pressed = SubResource("ColorButton")
+
+[node name="BorderPickerRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/BorderPickerRow"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "边框颜色"
+
+[node name="BorderPicker" type="ColorPickerButton" parent="Scroll/Fields/FlatFields/BorderPickerRow"]
+unique_name_in_owner = true
+layout_mode = 2
+metadata/style_key = "border_color"
+custom_minimum_size = Vector2(72, 30)
+color = Color(1, 0.81, 0.87, 0.96)
+theme_override_styles/normal = SubResource("ColorButton")
+theme_override_styles/hover = SubResource("ColorButton")
+theme_override_styles/pressed = SubResource("ColorButton")
+theme_override_styles/hover_pressed = SubResource("ColorButton")
+
+[node name="BorderWidthRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/BorderWidthRow"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "边框宽度"
+
+[node name="BorderWidth" type="SpinBox" parent="Scroll/Fields/FlatFields/BorderWidthRow"]
+unique_name_in_owner = true
+layout_mode = 2
+metadata/style_key = "border_width"
+custom_minimum_size = Vector2(90, 0)
+min_value = 0.0
+max_value = 32.0
+value = 2.0
+
+[node name="RadiusRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/RadiusRow"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "圆角半径"
+
+[node name="Radius" type="SpinBox" parent="Scroll/Fields/FlatFields/RadiusRow"]
+unique_name_in_owner = true
+layout_mode = 2
+metadata/style_key = "radius"
+custom_minimum_size = Vector2(90, 0)
+min_value = 0.0
+max_value = 128.0
+value = 24.0
+
+[node name="ShadowPickerRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/ShadowPickerRow"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "阴影颜色"
+
+[node name="ShadowPicker" type="ColorPickerButton" parent="Scroll/Fields/FlatFields/ShadowPickerRow"]
+unique_name_in_owner = true
+layout_mode = 2
+metadata/style_key = "shadow_color"
+custom_minimum_size = Vector2(72, 30)
+color = Color(0.10, 0.05, 0.14, 0.20)
+theme_override_styles/normal = SubResource("ColorButton")
+theme_override_styles/hover = SubResource("ColorButton")
+theme_override_styles/pressed = SubResource("ColorButton")
+theme_override_styles/hover_pressed = SubResource("ColorButton")
+
+[node name="ShadowSizeRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/ShadowSizeRow"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "阴影大小"
+
+[node name="ShadowSize" type="SpinBox" parent="Scroll/Fields/FlatFields/ShadowSizeRow"]
+unique_name_in_owner = true
+layout_mode = 2
+metadata/style_key = "shadow_size"
+custom_minimum_size = Vector2(90, 0)
+min_value = 0.0
+max_value = 64.0
+value = 8.0
+
+[node name="ShadowXRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/ShadowXRow"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "阴影偏移 X"
+
+[node name="ShadowX" type="SpinBox" parent="Scroll/Fields/FlatFields/ShadowXRow"]
+unique_name_in_owner = true
+layout_mode = 2
+metadata/style_key = "shadow_x"
+custom_minimum_size = Vector2(90, 0)
+min_value = -128.0
+max_value = 128.0
+value = 0.0
+
+[node name="ShadowYRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/ShadowYRow"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "阴影偏移 Y"
+
+[node name="ShadowY" type="SpinBox" parent="Scroll/Fields/FlatFields/ShadowYRow"]
+unique_name_in_owner = true
+layout_mode = 2
+metadata/style_key = "shadow_y"
+custom_minimum_size = Vector2(90, 0)
+min_value = -128.0
+max_value = 128.0
+value = 4.0
+
+[node name="TextureFields" type="VBoxContainer" parent="Scroll/Fields"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PathRow" type="HBoxContainer" parent="Scroll/Fields/TextureFields"]
+layout_mode = 2
+
+[node name="TexturePathEdit" type="LineEdit" parent="Scroll/Fields/TextureFields/PathRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "纹理图片路径"
+
+[node name="BrowseButton" type="Button" parent="Scroll/Fields/TextureFields/PathRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "浏览…"
+
+[node name="TintPickerRow" type="HBoxContainer" parent="Scroll/Fields/TextureFields"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Scroll/Fields/TextureFields/TintPickerRow"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "纹理染色"
+
+[node name="TintPicker" type="ColorPickerButton" parent="Scroll/Fields/TextureFields/TintPickerRow"]
+unique_name_in_owner = true
+layout_mode = 2
+metadata/style_key = "tint"
+custom_minimum_size = Vector2(72, 30)
+color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("ColorButton")
+theme_override_styles/hover = SubResource("ColorButton")
+theme_override_styles/pressed = SubResource("ColorButton")
+theme_override_styles/hover_pressed = SubResource("ColorButton")
+
+[node name="TextureMarginsLabel" type="Label" parent="Scroll/Fields/TextureFields"]
+layout_mode = 2
+text = "切片边距（左 / 上 / 右 / 下）"
+
+[node name="TextureMarginsRow" type="HBoxContainer" parent="Scroll/Fields/TextureFields"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Left" type="SpinBox" parent="Scroll/Fields/TextureFields/TextureMarginsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 512.0
+value = 24.0
+metadata/style_key = "texture_margins"
+metadata/side = 0
+tooltip_text = "左"
+
+[node name="Top" type="SpinBox" parent="Scroll/Fields/TextureFields/TextureMarginsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 512.0
+value = 24.0
+metadata/style_key = "texture_margins"
+metadata/side = 1
+tooltip_text = "上"
+
+[node name="Right" type="SpinBox" parent="Scroll/Fields/TextureFields/TextureMarginsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 512.0
+value = 24.0
+metadata/style_key = "texture_margins"
+metadata/side = 2
+tooltip_text = "右"
+
+[node name="Bottom" type="SpinBox" parent="Scroll/Fields/TextureFields/TextureMarginsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 512.0
+value = 24.0
+metadata/style_key = "texture_margins"
+metadata/side = 3
+tooltip_text = "下"
+
+[node name="DrawCenter" type="CheckBox" parent="Scroll/Fields"]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+text = "绘制中心区域"
+metadata/style_key = "draw_center"
+
+[node name="MarginsLabel" type="Label" parent="Scroll/Fields"]
+layout_mode = 2
+text = "内边距（左 / 上 / 右 / 下）"
+
+[node name="MarginsRow" type="HBoxContainer" parent="Scroll/Fields"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Left" type="SpinBox" parent="Scroll/Fields/MarginsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 128.0
+value = 18.0
+metadata/style_key = "margins"
+metadata/side = 0
+tooltip_text = "左"
+
+[node name="Top" type="SpinBox" parent="Scroll/Fields/MarginsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 128.0
+value = 24.0
+metadata/style_key = "margins"
+metadata/side = 1
+tooltip_text = "上"
+
+[node name="Right" type="SpinBox" parent="Scroll/Fields/MarginsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 128.0
+value = 18.0
+metadata/style_key = "margins"
+metadata/side = 2
+tooltip_text = "右"
+
+[node name="Bottom" type="SpinBox" parent="Scroll/Fields/MarginsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 128.0
+value = 14.0
+metadata/style_key = "margins"
+metadata/side = 3
+tooltip_text = "下"
+
+[node name="Decorations" type="CheckBox" parent="Scroll/Fields"]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+text = "显示默认蝴蝶结与星星装饰"
+metadata/style_key = "decorations"
+
+[node name="TextureFileDialog" type="FileDialog" parent="."]
+unique_name_in_owner = true
+size = Vector2i(900, 600)
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png,*.jpg,*.jpeg,*.webp,*.bmp,*.svg;图片")
+use_native_dialog = true

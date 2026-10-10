@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cd3rox1int1x4"]
+
+[ext_resource type="Script" uid="uid://cydt0hprsac4" path="res://scripts/scenes/main/main.gd" id="1_hyk8p"]
+[ext_resource type="PackedScene" uid="uid://blem01vopqsqa" path="res://scenes/editor/editor.tscn" id="3_k2fmo"]
+[ext_resource type="Script" uid="uid://dr8174nmr61f2" path="res://scripts/scenes/main/dialog_manager.gd" id="3_l3cfh"]
+
+[node name="MAIN" type="Node" unique_id=331409142]
+script = ExtResource("1_hyk8p")
+
+[node name="DialogManager" type="Node" parent="." unique_id=1168676075]
+unique_name_in_owner = true
+script = ExtResource("3_l3cfh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=654981060]
+
+[node name="Editor" parent="CanvasLayer" unique_id=1500848079 instance=ExtResource("3_k2fmo")]
+unique_name_in_owner = true

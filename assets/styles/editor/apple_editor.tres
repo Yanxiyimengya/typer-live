@@ -1,0 +1,509 @@
+[gd_resource type="Theme" format=3 uid="uid://d0xywxv1w7ast"]
+
+[ext_resource type="Texture2D" uid="uid://bdjaywke0tabr" path="res://assets/icons/add.svg" id="1_31n5x"]
+[ext_resource type="Texture2D" uid="uid://blek42aqvvefe" path="res://assets/icons/copy.svg" id="2_t1v10"]
+[ext_resource type="Texture2D" uid="uid://bp24ne1yp7wkc" path="res://assets/icons/dir/down.svg" id="3_22u8w"]
+[ext_resource type="Texture2D" uid="uid://bo6k6uruh0wql" path="res://assets/icons/dir/right.svg" id="4_7nw8m"]
+[ext_resource type="Texture2D" uid="uid://depuwrc5pj3bl" path="res://assets/icons/more.svg" id="5_jplfv"]
+[ext_resource type="Texture2D" uid="uid://b7umhuc12us85" path="res://assets/icons/dir/up.svg" id="6_48d4r"]
+[ext_resource type="FontFile" uid="uid://ck7fwtbw1dcjv" path="res://assets/fonts/Default.otf" id="6_t1v10"]
+
+[sub_resource type="StyleBoxFlat" id="AppleDisabled"]
+content_margin_left = 12.0
+content_margin_top = 7.0
+content_margin_right = 12.0
+content_margin_bottom = 7.0
+bg_color = Color(0.96, 0.96, 0.97, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.9, 0.9, 0.92, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="AppleFocus"]
+content_margin_left = 10.0
+content_margin_top = 7.0
+content_margin_right = 10.0
+content_margin_bottom = 7.0
+bg_color = Color(0, 0, 0, 0)
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0.478431, 1, 0.65)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="AppleButtonHover"]
+content_margin_left = 12.0
+content_margin_top = 7.0
+content_margin_right = 12.0
+content_margin_bottom = 7.0
+bg_color = Color(0.94, 0.95, 0.97, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.75, 0.77, 0.8, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="AppleButtonPressed"]
+content_margin_left = 12.0
+content_margin_top = 7.0
+content_margin_right = 12.0
+content_margin_bottom = 7.0
+bg_color = Color(0, 0.478431, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0.42, 0.9, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="AppleButton"]
+content_margin_left = 12.0
+content_margin_top = 7.0
+content_margin_right = 12.0
+content_margin_bottom = 7.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.82, 0.82, 0.84, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxEmpty" id="AppleCheck"]
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="AppleCheckHover"]
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
+bg_color = Color(0.94, 0.94, 0.96, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_svbvx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ae1hd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hx1gb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x7r7a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a3vti"]
+
+[sub_resource type="Gradient" id="TransparentGradient"]
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="ScrollArrow"]
+gradient = SubResource("TransparentGradient")
+width = 1
+height = 1
+
+[sub_resource type="StyleBoxFlat" id="AppleScrollGrabber"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.56, 0.56, 0.59, 0.55)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="AppleScrollHover"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.44, 0.44, 0.47, 0.8)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="AppleScrollPressed"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0.478431, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="AppleScrollTrack"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.94, 0.94, 0.96, 0.5)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="ScrollFocus"]
+
+[sub_resource type="StyleBoxFlat" id="AppleAccent"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0.478431, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="AppleInput"]
+content_margin_left = 10.0
+content_margin_top = 7.0
+content_margin_right = 10.0
+content_margin_bottom = 7.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.82, 0.82, 0.85, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="AppleSelection"]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+bg_color = Color(0.84, 0.91, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="SystemFont" id="AppleFont"]
+fallbacks = Array[Font]([ExtResource("6_t1v10")])
+font_names = PackedStringArray("SF Pro Text", "SF Pro Display", "Segoe UI", "PingFang SC")
+
+[sub_resource type="StyleBoxFlat" id="AppleInputReadOnly"]
+content_margin_left = 10.0
+content_margin_top = 7.0
+content_margin_right = 10.0
+content_margin_bottom = 7.0
+bg_color = Color(0.96, 0.96, 0.97, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.88, 0.88, 0.9, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="AppleBackground"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.96, 0.96, 0.97, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="AppleSurface"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.88, 0.88, 0.9, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="AppleMenuHover"]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+bg_color = Color(0.9, 0.94, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="ApplePopup"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.86, 0.86, 0.88, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.12)
+shadow_size = 10
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxEmpty" id="AppleSeparator"]
+content_margin_top = 6.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="AppleTab"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.85, 0.86, 0.88, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="AppleTabInactive"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0.94, 0.94, 0.96, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[resource]
+default_font = SubResource("AppleFont")
+default_font_size = 16
+Button/colors/font_color = Color(0.113725, 0.113725, 0.121569, 1)
+Button/colors/font_disabled_color = Color(0.56, 0.56, 0.59, 1)
+Button/colors/font_focus_color = Color(0.113725, 0.113725, 0.121569, 1)
+Button/colors/font_hover_color = Color(0.113725, 0.113725, 0.121569, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/styles/disabled = SubResource("AppleDisabled")
+Button/styles/focus = SubResource("AppleFocus")
+Button/styles/hover = SubResource("AppleButtonHover")
+Button/styles/hover_pressed = SubResource("AppleButtonPressed")
+Button/styles/normal = SubResource("AppleButton")
+Button/styles/pressed = SubResource("AppleButtonPressed")
+CheckBox/colors/button_checked_color = Color(0, 0.478431, 1, 1)
+CheckBox/colors/button_unchecked_color = Color(0.78, 0.78, 0.8, 1)
+CheckBox/colors/font_color = Color(0.113725, 0.113725, 0.121569, 1)
+CheckBox/colors/font_disabled_color = Color(0.56, 0.56, 0.59, 1)
+CheckBox/colors/font_focus_color = Color(0.113725, 0.113725, 0.121569, 1)
+CheckBox/colors/font_hover_color = Color(0.113725, 0.113725, 0.121569, 1)
+CheckBox/colors/font_hover_pressed_color = Color(0.113725, 0.113725, 0.121569, 1)
+CheckBox/colors/font_pressed_color = Color(0.113725, 0.113725, 0.121569, 1)
+CheckBox/styles/disabled = SubResource("AppleCheck")
+CheckBox/styles/hover = SubResource("AppleCheckHover")
+CheckBox/styles/hover_pressed = SubResource("AppleCheckHover")
+CheckBox/styles/normal = SubResource("AppleCheck")
+CheckBox/styles/pressed = SubResource("AppleCheck")
+CheckButton/colors/button_checked_color = Color(0, 0.478431, 1, 1)
+CheckButton/colors/button_unchecked_color = Color(0.78, 0.78, 0.8, 1)
+CheckButton/colors/font_color = Color(0.113725, 0.113725, 0.121569, 1)
+CheckButton/colors/font_disabled_color = Color(0.56, 0.56, 0.59, 1)
+CheckButton/colors/font_focus_color = Color(0.113725, 0.113725, 0.121569, 1)
+CheckButton/colors/font_hover_color = Color(0.113725, 0.113725, 0.121569, 1)
+CheckButton/colors/font_hover_pressed_color = Color(0.113725, 0.113725, 0.121569, 1)
+CheckButton/colors/font_pressed_color = Color(0.113725, 0.113725, 0.121569, 1)
+CheckButton/styles/disabled = SubResource("AppleCheck")
+CheckButton/styles/hover = SubResource("AppleCheckHover")
+CheckButton/styles/hover_pressed = SubResource("AppleCheckHover")
+CheckButton/styles/normal = SubResource("AppleCheck")
+CheckButton/styles/pressed = SubResource("AppleCheck")
+ColorPicker/icons/add_preset = ExtResource("1_31n5x")
+ColorPicker/icons/color_copy = ExtResource("2_t1v10")
+ColorPicker/icons/expanded_arrow = ExtResource("3_22u8w")
+ColorPicker/icons/folded_arrow = ExtResource("4_7nw8m")
+ColorPicker/icons/menu_option = ExtResource("5_jplfv")
+ColorPicker/styles/picker_focus_circle = SubResource("StyleBoxEmpty_svbvx")
+ColorPicker/styles/picker_focus_rectangle = SubResource("StyleBoxEmpty_ae1hd")
+ColorPicker/styles/sample_focus = SubResource("StyleBoxEmpty_hx1gb")
+ColorPicker/styles/tab_selected = SubResource("StyleBoxEmpty_x7r7a")
+ColorPicker/styles/tab_unselected = SubResource("StyleBoxEmpty_a3vti")
+HScrollBar/icons/decrement = SubResource("ScrollArrow")
+HScrollBar/icons/decrement_highlight = SubResource("ScrollArrow")
+HScrollBar/icons/decrement_pressed = SubResource("ScrollArrow")
+HScrollBar/icons/increment = SubResource("ScrollArrow")
+HScrollBar/icons/increment_highlight = SubResource("ScrollArrow")
+HScrollBar/icons/increment_pressed = SubResource("ScrollArrow")
+HScrollBar/styles/grabber = SubResource("AppleScrollGrabber")
+HScrollBar/styles/grabber_highlight = SubResource("AppleScrollHover")
+HScrollBar/styles/grabber_pressed = SubResource("AppleScrollPressed")
+HScrollBar/styles/scroll = SubResource("AppleScrollTrack")
+HScrollBar/styles/scroll_focus = SubResource("ScrollFocus")
+HSlider/styles/grabber_area = SubResource("AppleAccent")
+HSlider/styles/grabber_area_highlight = SubResource("AppleAccent")
+HSlider/styles/slider = SubResource("AppleScrollTrack")
+ItemList/colors/font_color = Color(0.113725, 0.113725, 0.121569, 1)
+ItemList/colors/font_disabled_color = Color(0.56, 0.56, 0.59, 1)
+ItemList/colors/font_focus_color = Color(0.113725, 0.113725, 0.121569, 1)
+ItemList/colors/font_hover_color = Color(0.113725, 0.113725, 0.121569, 1)
+ItemList/colors/font_hovered_color = Color(0.113725, 0.113725, 0.121569, 1)
+ItemList/colors/font_selected_color = Color(0.113725, 0.113725, 0.121569, 1)
+ItemList/styles/panel = SubResource("AppleInput")
+ItemList/styles/selected = SubResource("AppleSelection")
+ItemList/styles/selected_focus = SubResource("AppleAccent")
+Label/colors/font_color = Color(0.113725, 0.113725, 0.121569, 1)
+Label/colors/font_disabled_color = Color(0.56, 0.56, 0.59, 1)
+Label/colors/font_focus_color = Color(0.113725, 0.113725, 0.121569, 1)
+Label/colors/font_hover_color = Color(0.113725, 0.113725, 0.121569, 1)
+Label/font_sizes/font_size = 16
+LineEdit/colors/caret_color = Color(0, 0.478431, 1, 1)
+LineEdit/colors/font_color = Color(0.113725, 0.113725, 0.121569, 1)
+LineEdit/colors/font_disabled_color = Color(0.56, 0.56, 0.59, 1)
+LineEdit/colors/font_focus_color = Color(0.113725, 0.113725, 0.121569, 1)
+LineEdit/colors/font_hover_color = Color(0.113725, 0.113725, 0.121569, 1)
+LineEdit/colors/font_selected_color = Color(0.113725, 0.113725, 0.121569, 1)
+LineEdit/colors/selection_color = Color(0, 0.478431, 1, 0.25)
+LineEdit/constants/caret_width = 2
+LineEdit/font_sizes/font_size = 16
+LineEdit/fonts/font = SubResource("AppleFont")
+LineEdit/styles/focus = SubResource("AppleFocus")
+LineEdit/styles/normal = SubResource("AppleInput")
+LineEdit/styles/read_only = SubResource("AppleInputReadOnly")
+MenuButton/colors/font_color = Color(0.113725, 0.113725, 0.121569, 1)
+MenuButton/colors/font_disabled_color = Color(0.56, 0.56, 0.59, 1)
+MenuButton/colors/font_focus_color = Color(0.113725, 0.113725, 0.121569, 1)
+MenuButton/colors/font_hover_color = Color(0.113725, 0.113725, 0.121569, 1)
+MenuButton/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+MenuButton/colors/font_pressed_color = Color(1, 1, 1, 1)
+MenuButton/styles/disabled = SubResource("AppleDisabled")
+MenuButton/styles/focus = SubResource("AppleFocus")
+MenuButton/styles/hover = SubResource("AppleButtonHover")
+MenuButton/styles/hover_pressed = SubResource("AppleButtonPressed")
+MenuButton/styles/normal = SubResource("AppleButton")
+MenuButton/styles/pressed = SubResource("AppleButtonPressed")
+OptionButton/colors/font_color = Color(0.113725, 0.113725, 0.121569, 1)
+OptionButton/colors/font_disabled_color = Color(0.56, 0.56, 0.59, 1)
+OptionButton/colors/font_focus_color = Color(0.113725, 0.113725, 0.121569, 1)
+OptionButton/colors/font_hover_color = Color(0.113725, 0.113725, 0.121569, 1)
+OptionButton/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+OptionButton/colors/font_pressed_color = Color(1, 1, 1, 1)
+OptionButton/styles/disabled = SubResource("AppleDisabled")
+OptionButton/styles/focus = SubResource("AppleFocus")
+OptionButton/styles/hover = SubResource("AppleButtonHover")
+OptionButton/styles/hover_pressed = SubResource("AppleButtonPressed")
+OptionButton/styles/normal = SubResource("AppleButton")
+OptionButton/styles/pressed = SubResource("AppleButtonPressed")
+Panel/styles/panel = SubResource("AppleBackground")
+PanelContainer/styles/panel = SubResource("AppleSurface")
+PopupMenu/colors/font_color = Color(0.113725, 0.113725, 0.121569, 1)
+PopupMenu/colors/font_disabled_color = Color(0.56, 0.56, 0.59, 1)
+PopupMenu/colors/font_focus_color = Color(0.113725, 0.113725, 0.121569, 1)
+PopupMenu/colors/font_hover_color = Color(0.113725, 0.113725, 0.121569, 1)
+PopupMenu/colors/font_separator_color = Color(0.56, 0.56, 0.59, 1)
+PopupMenu/styles/hover = SubResource("AppleMenuHover")
+PopupMenu/styles/panel = SubResource("ApplePopup")
+PopupMenu/styles/separator = SubResource("AppleSeparator")
+PopupPanel/styles/panel = SubResource("ApplePopup")
+ProgressBar/styles/background = SubResource("AppleInputReadOnly")
+ProgressBar/styles/fill = SubResource("AppleAccent")
+RichTextLabel/colors/font_color = Color(0.113725, 0.113725, 0.121569, 1)
+RichTextLabel/colors/font_disabled_color = Color(0.56, 0.56, 0.59, 1)
+RichTextLabel/colors/font_focus_color = Color(0.113725, 0.113725, 0.121569, 1)
+RichTextLabel/colors/font_hover_color = Color(0.113725, 0.113725, 0.121569, 1)
+SpinBox/icons/down = ExtResource("3_22u8w")
+SpinBox/icons/down_disabled = ExtResource("3_22u8w")
+SpinBox/icons/down_hover = ExtResource("3_22u8w")
+SpinBox/icons/down_pressed = ExtResource("3_22u8w")
+SpinBox/icons/up = ExtResource("6_48d4r")
+SpinBox/icons/up_disabled = ExtResource("6_48d4r")
+SpinBox/icons/up_hover = ExtResource("6_48d4r")
+SpinBox/icons/up_pressed = ExtResource("6_48d4r")
+TabBar/colors/font_hovered_color = Color(0.113725, 0.113725, 0.121569, 1)
+TabBar/colors/font_selected_color = Color(0.113725, 0.113725, 0.121569, 1)
+TabBar/colors/font_unselected_color = Color(0.44, 0.44, 0.47, 1)
+TabBar/styles/tab_focus = SubResource("AppleFocus")
+TabBar/styles/tab_hovered = SubResource("AppleButtonHover")
+TabBar/styles/tab_selected = SubResource("AppleTab")
+TabBar/styles/tab_unselected = SubResource("AppleTabInactive")
+TabContainer/colors/font_hovered_color = Color(0.113725, 0.113725, 0.121569, 1)
+TabContainer/colors/font_selected_color = Color(0.113725, 0.113725, 0.121569, 1)
+TabContainer/colors/font_unselected_color = Color(0.44, 0.44, 0.47, 1)
+TabContainer/styles/panel = SubResource("AppleSurface")
+TabContainer/styles/tab_focus = SubResource("AppleFocus")
+TabContainer/styles/tab_hovered = SubResource("AppleButtonHover")
+TabContainer/styles/tab_selected = SubResource("AppleTab")
+TabContainer/styles/tab_unselected = SubResource("AppleTabInactive")
+TextEdit/colors/caret_color = Color(0, 0.478431, 1, 1)
+TextEdit/colors/font_color = Color(0.113725, 0.113725, 0.121569, 1)
+TextEdit/colors/font_disabled_color = Color(0.56, 0.56, 0.59, 1)
+TextEdit/colors/font_focus_color = Color(0.113725, 0.113725, 0.121569, 1)
+TextEdit/colors/font_hover_color = Color(0.113725, 0.113725, 0.121569, 1)
+TextEdit/colors/font_selected_color = Color(0.113725, 0.113725, 0.121569, 1)
+TextEdit/colors/selection_color = Color(0, 0.478431, 1, 0.25)
+TextEdit/fonts/font = SubResource("AppleFont")
+TextEdit/styles/focus = SubResource("AppleFocus")
+TextEdit/styles/normal = SubResource("AppleInput")
+TextEdit/styles/read_only = SubResource("AppleInputReadOnly")
+TooltipPanel/styles/panel = SubResource("ApplePopup")
+Tree/colors/font_color = Color(0.113725, 0.113725, 0.121569, 1)
+Tree/colors/font_disabled_color = Color(0.56, 0.56, 0.59, 1)
+Tree/colors/font_focus_color = Color(0.113725, 0.113725, 0.121569, 1)
+Tree/colors/font_hover_color = Color(0.113725, 0.113725, 0.121569, 1)
+Tree/colors/font_hovered_color = Color(0.113725, 0.113725, 0.121569, 1)
+Tree/colors/font_selected_color = Color(0.113725, 0.113725, 0.121569, 1)
+Tree/styles/panel = SubResource("AppleInput")
+Tree/styles/selected = SubResource("AppleSelection")
+Tree/styles/selected_focus = SubResource("AppleAccent")
+VScrollBar/icons/decrement = SubResource("ScrollArrow")
+VScrollBar/icons/decrement_highlight = SubResource("ScrollArrow")
+VScrollBar/icons/decrement_pressed = SubResource("ScrollArrow")
+VScrollBar/icons/increment = SubResource("ScrollArrow")
+VScrollBar/icons/increment_highlight = SubResource("ScrollArrow")
+VScrollBar/icons/increment_pressed = SubResource("ScrollArrow")
+VScrollBar/styles/grabber = SubResource("AppleScrollGrabber")
+VScrollBar/styles/grabber_highlight = SubResource("AppleScrollHover")
+VScrollBar/styles/grabber_pressed = SubResource("AppleScrollPressed")
+VScrollBar/styles/scroll = SubResource("AppleScrollTrack")
+VScrollBar/styles/scroll_focus = SubResource("ScrollFocus")
+VSlider/styles/grabber_area = SubResource("AppleAccent")
+VSlider/styles/grabber_area_highlight = SubResource("AppleAccent")
+VSlider/styles/slider = SubResource("AppleScrollTrack")

@@ -1,0 +1,300 @@
+[gd_scene format=3 uid="uid://dfu5lwhq2wcda"]
+
+[ext_resource type="Script" uid="uid://c6wjvkul3n1fl" path="res://scripts/scenes/editor/settings/settings.gd" id="1_caek6"]
+[ext_resource type="Texture2D" uid="uid://dbb744fjhxfp0" path="res://assets/icons/reset.svg" id="3_reset"]
+[ext_resource type="PackedScene" uid="uid://bjv0xvguuersf" path="res://scenes/editor/editor_tool_button.tscn" id="4_tool_button"]
+[ext_resource type="PackedScene" uid="uid://mkmy1ntbr868" path="res://scenes/editor/settings/bubble_settings.tscn" id="5_bubble_settings"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.95, 0.96, 0.97, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="StyleBoxFlat" id="SettingsTabHover"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.92, 0.95, 0.98, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p50xn"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.88, 0.94, 0.98, 1)
+border_width_bottom = 2
+border_color = Color(0.16, 0.56, 0.8, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_color"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.5716493, 0.5716493, 0.57164925, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_confirm"]
+content_margin_left = 24.0
+content_margin_top = 8.0
+content_margin_right = 24.0
+content_margin_bottom = 8.0
+bg_color = Color(0.15686275, 0.5647059, 0.8, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Settings" type="PanelContainer" unique_id=1106674786]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+script = ExtResource("1_caek6")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=474317387]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=617724340]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer" unique_id=1422212904]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+theme_override_colors/font_selected_color = Color(0.1, 0.38, 0.6, 1)
+theme_override_colors/font_hovered_color = Color(0.1, 0.38, 0.6, 1)
+theme_override_colors/font_unselected_color = Color(0.34, 0.39, 0.44, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_tab")
+theme_override_styles/tab_hovered = SubResource("SettingsTabHover")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_p50xn")
+current_tab = 0
+tab_0/title = "常规设置"
+tab_1/title = "字体设置"
+tab_2/title = "气泡设置"
+
+[node name="GeneralSettings" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer" unique_id=1536728162]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+metadata/_tab_name = "常规设置"
+metadata/_tab_index = 0
+
+[node name="Fields" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings" unique_id=1164273812]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="VoiceLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields" unique_id=838310023]
+layout_mode = 2
+text = "默认音效路径"
+
+[node name="VoiceRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields" unique_id=1057046892]
+layout_mode = 2
+
+[node name="VoicePathEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/VoiceRow" unique_id=1974715300]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "音效文件路径（WAV / OGG / MP3），留空关闭音效"
+
+[node name="VoiceBrowseButton" type="Button" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/VoiceRow" unique_id=1375997177]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+text = "浏览…"
+
+[node name="VoiceResetButton" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/VoiceRow" unique_id=346543333 instance=ExtResource("4_tool_button")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "还原默认音效"
+theme_override_constants/icon_max_width = 20
+icon = ExtResource("3_reset")
+
+[node name="FadeOutRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields" unique_id=985614771]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="FadeOutLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/FadeOutRow" unique_id=1067570220]
+layout_mode = 2
+text = "打完字停留的时长 / 秒"
+
+[node name="FadeOutTimeSpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/FadeOutRow" unique_id=409018808]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+max_value = 3600.0
+step = 0.1
+value = 2.0
+allow_greater = true
+
+[node name="FadeOutResetButton" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/FadeOutRow" unique_id=1936208759 instance=ExtResource("4_tool_button")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "还原默认停留时长（2 秒）"
+theme_override_constants/icon_max_width = 20
+icon = ExtResource("3_reset")
+
+[node name="FadeOutHint" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields" unique_id=1074693688]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42, 0.47, 0.53, 1)
+text = "文字全部打印完成后等待，再淡出气泡。设为 0 时直接淡出。"
+autowrap_mode = 3
+
+[node name="FontSettings" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer" unique_id=2121824595]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+metadata/_tab_name = "字体设置"
+metadata/_tab_index = 1
+
+[node name="Fields" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/FontSettings" unique_id=1431334789]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="FontLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/FontSettings/Fields" unique_id=282820809]
+layout_mode = 2
+text = "默认字体"
+
+[node name="FontChoiceRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/FontSettings/Fields" unique_id=467834178]
+layout_mode = 2
+
+[node name="FontOptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/FontSettings/Fields/FontChoiceRow" unique_id=443154837]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FontResetButton" parent="MarginContainer/VBoxContainer/TabContainer/FontSettings/Fields/FontChoiceRow" unique_id=704942491 instance=ExtResource("4_tool_button")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "还原默认字体"
+theme_override_constants/icon_max_width = 20
+icon = ExtResource("3_reset")
+
+[node name="FontRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/FontSettings/Fields" unique_id=1966494017]
+layout_mode = 2
+
+[node name="FontPathEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/TabContainer/FontSettings/Fields/FontRow" unique_id=2040195678]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "字体文件路径（TTF / OTF / TTC）"
+
+[node name="FontBrowseButton" type="Button" parent="MarginContainer/VBoxContainer/TabContainer/FontSettings/Fields/FontRow" unique_id=1642743073]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+text = "浏览…"
+
+[node name="SizeRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/FontSettings/Fields" unique_id=924383883]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="SizeLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/FontSettings/Fields/SizeRow" unique_id=1519580974]
+layout_mode = 2
+text = "默认字体大小"
+
+[node name="FontSizeSpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/TabContainer/FontSettings/Fields/SizeRow" unique_id=1461743404]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 32)
+layout_mode = 2
+min_value = 1.0
+max_value = 200.0
+value = 24.0
+
+[node name="SizeResetButton" parent="MarginContainer/VBoxContainer/TabContainer/FontSettings/Fields/SizeRow" unique_id=1887508295 instance=ExtResource("4_tool_button")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "还原默认字号"
+theme_override_constants/icon_max_width = 20
+icon = ExtResource("3_reset")
+
+[node name="ColorRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/FontSettings/Fields" unique_id=962036600]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ColorLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/FontSettings/Fields/ColorRow" unique_id=1798702919]
+layout_mode = 2
+text = "默认文字颜色"
+
+[node name="FontColorButton" type="ColorPickerButton" parent="MarginContainer/VBoxContainer/TabContainer/FontSettings/Fields/ColorRow" unique_id=1095926435]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_color")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_color")
+theme_override_styles/hover = SubResource("StyleBoxFlat_color")
+color = Color(1, 1, 1, 1)
+
+[node name="ColorResetButton" parent="MarginContainer/VBoxContainer/TabContainer/FontSettings/Fields/ColorRow" unique_id=1515149255 instance=ExtResource("4_tool_button")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "还原默认文字颜色"
+theme_override_constants/icon_max_width = 20
+icon = ExtResource("3_reset")
+
+[node name="BubbleSettings" parent="MarginContainer/VBoxContainer/TabContainer" unique_id=1232600744 instance=ExtResource("5_bubble_settings")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+metadata/_tab_name = "气泡设置"
+metadata/_tab_index = 2
+
+[node name="ConfirmButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=297367181]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_confirm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_confirm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_confirm")
+text = "确认"
+
+[node name="ResourceFileDialog" type="FileDialog" parent="." unique_id=1322964586]
+unique_name_in_owner = true
+title = "Open a File"
+size = Vector2i(900, 600)
+file_mode = 0
+access = 2
+use_native_dialog = true

@@ -1,0 +1,6 @@
+[gd_resource type="Theme" format=3 uid="uid://nbgqqc3ayfg5"]
+
+[ext_resource type="FontFile" uid="uid://ck7fwtbw1dcjv" path="res://assets/fonts/Default.otf" id="1_yrarh"]
+
+[resource]
+Label/fonts/font = ExtResource("1_yrarh")

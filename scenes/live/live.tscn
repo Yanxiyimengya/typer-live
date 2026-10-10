@@ -1,0 +1,130 @@
+[gd_scene format=3 uid="uid://vfy15iuwkbvj"]
+
+[ext_resource type="PackedScene" uid="uid://mktqxxetav5y" path="res://scenes/live/dialog/dialog_bubble.tscn" id="1_4wm3x"]
+[ext_resource type="Script" uid="uid://c26l0ux30kd4j" path="res://scripts/scenes/live/live.gd" id="1_g5ffh"]
+[ext_resource type="Script" uid="uid://bwadx7jwvo4ac" path="res://scripts/scenes/live/anim_translate.gd" id="2_80f58"]
+[ext_resource type="FontFile" uid="uid://ck7fwtbw1dcjv" path="res://assets/fonts/Default.otf" id="4_dsmgv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dn5cr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dn5cr"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.1452662, 0.1452662, 0.14526615, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[sub_resource type="Animation" id="Animation_g5ffh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_80f58"]
+resource_name = "fade_in"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_dsmgv"]
+resource_name = "fade_out"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eewnl"]
+_data = {
+&"RESET": SubResource("Animation_g5ffh"),
+&"fade_in": SubResource("Animation_80f58"),
+&"fade_out": SubResource("Animation_dsmgv")
+}
+
+[node name="Live" type="Control" unique_id=1008521890]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g5ffh")
+
+[node name="AnimTranslate" type="Control" parent="." unique_id=751987382]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+script = ExtResource("2_80f58")
+
+[node name="DialogBubble" parent="AnimTranslate" unique_id=2018850484 instance=ExtResource("1_4wm3x")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 1
+theme = null
+theme_override_styles/panel = SubResource("StyleBoxEmpty_dn5cr")
+font = ExtResource("4_dsmgv")
+
+[node name="SenderPanelContainer" parent="AnimTranslate/DialogBubble/VBoxContainer" parent_id_path=PackedInt32Array(2018850484, 768980022) index="0" unique_id=1297553357]
+z_index = 1
+custom_minimum_size = Vector2(0, 0)
+theme_override_styles/panel = SubResource("StyleBoxFlat_dn5cr")
+
+[node name="SenderTextLabel" parent="AnimTranslate/DialogBubble/VBoxContainer/SenderPanelContainer" index="0" unique_id=578394804]
+text = "你好"
+
+[node name="MarginContainer" parent="AnimTranslate/DialogBubble/VBoxContainer/PanelContainer" parent_id_path=PackedInt32Array(2018850484, 428902698) index="0" unique_id=1466521957]
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+
+[node name="DialogTextLabel" parent="AnimTranslate/DialogBubble/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(2018850484, 1871255080) index="0" unique_id=1826978105]
+fit_content = false
+scroll_following = true
+
+[node name="FadingAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1264847143]
+unique_name_in_owner = true
+root_node = NodePath("../AnimTranslate")
+libraries/ = SubResource("AnimationLibrary_eewnl")
+
+[editable path="AnimTranslate/DialogBubble"]

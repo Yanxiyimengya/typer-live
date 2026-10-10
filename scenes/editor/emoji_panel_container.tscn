@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://cgj8k3i3lnurp"]
+
+[ext_resource type="Script" uid="uid://clqd3nq8dxhkp" path="res://scripts/scenes/editor/emoji_panel_container.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://ck7fwtbw1dcjv" path="res://assets/fonts/Default.otf" id="2_font"]
+
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oljq2"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.09803922)
+shadow_size = 8
+shadow_offset = Vector2(5, 5)
+
+[node name="EmojiPanelContainer" type="PanelContainer" unique_id=1059541183]
+top_level = true
+offset_right = 326.0
+offset_bottom = 300.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_oljq2")
+script = ExtResource("1_script")
+
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+text = "表情"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="EmojiGrid" type="GridContainer" parent="Content/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+columns = 6

@@ -1,0 +1,46 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="TyperLive"
+run/main_scene="uid://cd3rox1int1x4"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[autoload]
+
+GlobalWindowManager="*uid://dga3rrfg7u81v"
+GlobalSoundManager="*uid://byp82xo4uqxk5"
+GlobalSettings="*res://scripts/autoloads/global_settings/global_settings.gd"
+GlobalResourceLoader="*res://scripts/autoloads/global_resource_loader/global_resource_loader.gd"
+
+[display]
+
+window/subwindows/embed_subwindows=false
+window/stretch/aspect="expand"
+window/per_pixel_transparency/allowed=true
+
+[file_customization]
+
+folder_colors={
+"res://scenes/": "orange",
+"res://scripts/": "teal"
+}
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

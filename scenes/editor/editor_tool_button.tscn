@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bjv0xvguuersf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bhunq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6f8o3"]
+bg_color = Color(0, 0, 0, 0.3137255)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sn0t7"]
+
+[node name="TextToolButton" type="Button" unique_id=150235111]
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bhunq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6f8o3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_sn0t7")

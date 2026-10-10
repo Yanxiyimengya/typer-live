@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://crshouyqi1uuk"]
+
+[ext_resource type="Script" uid="uid://dsqljavfkk5re" path="res://scripts/scenes/editor/color_picker_view.gd" id="1_ul4tb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oljq2"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.09803922)
+shadow_size = 8
+shadow_offset = Vector2(5, 5)
+
+[node name="ColorPickerView" type="PanelContainer" unique_id=388117775]
+top_level = true
+offset_right = 308.0
+offset_bottom = 503.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_oljq2")
+script = ExtResource("1_ul4tb")
+
+[node name="ColorPicker" type="ColorPicker" parent="." unique_id=1445202115]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+edit_intensity = false
+picker_shape = 2
+sampler_visible = false
+color_modes_visible = false

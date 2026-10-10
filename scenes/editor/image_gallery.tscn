@@ -1,0 +1,169 @@
+[gd_scene format=3 uid="uid://6dtacltx2053"]
+
+[ext_resource type="Script" uid="uid://dnr1qiqg36qpw" path="res://scripts/scenes/editor/image_gallery.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://ck7fwtbw1dcjv" path="res://assets/fonts/Default.otf" id="3_font"]
+
+[sub_resource type="StyleBoxFlat" id="Panel"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.57, 0.57, 0.57, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0, 0, 0, 0.1)
+shadow_size = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wh6ev"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.9097219, 0.9196724, 0.9296132, 1)
+
+[sub_resource type="StyleBoxFlat" id="Tab"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.9647059, 0.96862745, 0.972549, 1)
+
+[sub_resource type="StyleBoxFlat" id="Import"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.15686275, 0.5647059, 0.8, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="DeleteNormal"]
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="DeleteHover"]
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
+bg_color = Color(0.98, 0.94, 0.94, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_left = 5
+corner_radius_bottom_right = 5
+
+[node name="ImageGallery" type="PanelContainer" unique_id=1202888242]
+top_level = true
+offset_right = 440.0
+offset_bottom = 360.0
+theme_override_styles/panel = SubResource("Panel")
+script = ExtResource("1_script")
+
+[node name="Content" type="VBoxContainer" parent="." unique_id=642747272]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Header" type="HBoxContainer" parent="Content" unique_id=869778508]
+layout_mode = 2
+
+[node name="Tabs" type="TabBar" parent="Content/Header" unique_id=149436936]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hovered_color = Color(0, 0, 0, 1)
+theme_override_colors/font_unselected_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_wh6ev")
+theme_override_styles/tab_hovered = SubResource("Tab")
+theme_override_styles/tab_selected = SubResource("Tab")
+theme_override_styles/tab_focus = SubResource("Tab")
+current_tab = 0
+tab_count = 2
+tab_0/title = "导入"
+tab_1/title = "图库"
+
+[node name="DeleteButton" type="CheckButton" parent="Content/Header" unique_id=1118657183]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 36)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.8, 0.23921569, 0.26666668, 1)
+theme_override_colors/font_focus_color = Color(0.8, 0.23921569, 0.26666668, 1)
+theme_override_colors/font_pressed_color = Color(0.8, 0.23921569, 0.26666668, 1)
+theme_override_colors/font_hover_color = Color(0.8, 0.23921569, 0.26666668, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.8, 0.23921569, 0.26666668, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_colors/button_checked_color = Color(0.8, 0.23921569, 0.26666668, 1)
+theme_override_styles/normal = SubResource("DeleteNormal")
+theme_override_styles/hover = SubResource("DeleteHover")
+theme_override_styles/pressed = SubResource("DeleteNormal")
+theme_override_styles/hover_pressed = SubResource("DeleteHover")
+text = "删除"
+
+[node name="ImportPage" type="VBoxContainer" parent="Content" unique_id=1875914657]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="ImportLabel" type="Label" parent="Content/ImportPage" unique_id=33963789]
+custom_minimum_size = Vector2(390, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+text = "从本地导入图片，最近使用的图片会保存在图库中。"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="ImportButton" type="Button" parent="Content/ImportPage" unique_id=1004001400]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_styles/normal = SubResource("Import")
+theme_override_styles/pressed = SubResource("Import")
+theme_override_styles/hover = SubResource("Import")
+text = "选择图片…"
+
+[node name="GalleryPage" type="VBoxContainer" parent="Content" unique_id=2003702553]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EmptyLabel" type="Label" parent="Content/GalleryPage" unique_id=1622949469]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+text = "暂无历史图片，请先从「导入」添加图片。"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Content/GalleryPage" unique_id=1130854931]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="ImageGrid" type="GridContainer" parent="Content/GalleryPage/ScrollContainer" unique_id=1605362450]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 4

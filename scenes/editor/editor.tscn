@@ -1,0 +1,373 @@
+[gd_scene format=3 uid="uid://blem01vopqsqa"]
+
+[ext_resource type="Theme" uid="uid://d1elvi8w0sk06" path="res://assets/styles/editor/editor.tres" id="1_b8rj3"]
+[ext_resource type="Script" uid="uid://dmes7emg8ji7p" path="res://scripts/scenes/editor/editor.gd" id="1_bc6i7"]
+[ext_resource type="Texture2D" uid="uid://dpfjkgbv1boak" path="res://assets/icons/b.svg" id="2_5cfe8"]
+[ext_resource type="FontFile" uid="uid://ck7fwtbw1dcjv" path="res://assets/fonts/Default.otf" id="2_m0is4"]
+[ext_resource type="PackedScene" uid="uid://bjv0xvguuersf" path="res://scenes/editor/editor_tool_button.tscn" id="2_pq70c"]
+[ext_resource type="Texture2D" uid="uid://dltko8ewb1xck" path="res://assets/icons/i.svg" id="3_7gtdv"]
+[ext_resource type="Texture2D" uid="uid://5a7igsdnc2c2" path="res://assets/icons/u.svg" id="4_jwsr6"]
+[ext_resource type="Texture2D" uid="uid://da8yx5phf43bm" path="res://assets/icons/s.svg" id="5_ro56m"]
+[ext_resource type="Texture2D" uid="uid://bxwn8lpbs8doq" path="res://assets/icons/font-color.svg" id="6_5q5vg"]
+[ext_resource type="Texture2D" uid="uid://c3tvb42ekryj3" path="res://assets/icons/font-color-color.svg" id="7_rolao"]
+[ext_resource type="Texture2D" uid="uid://cmbv3553wg7n5" path="res://assets/icons/emoji.svg" id="8_p4u40"]
+[ext_resource type="PackedScene" uid="uid://crshouyqi1uuk" path="res://scenes/editor/color_picker_view.tscn" id="9_oljq2"]
+[ext_resource type="Texture2D" uid="uid://d0qxmbnnovhj5" path="res://assets/icons/image.svg" id="9_syr16"]
+[ext_resource type="Texture2D" uid="uid://b7umhuc12us85" path="res://assets/icons/dir/up.svg" id="10_ja8tm"]
+[ext_resource type="Texture2D" uid="uid://raiqil6nk6d0" path="res://assets/icons/bgcolor.svg" id="10_qnluh"]
+[ext_resource type="Texture2D" uid="uid://dmh6d2vdq2sp1" path="res://assets/icons/bgcolor-color.svg" id="11_i3ywb"]
+[ext_resource type="Texture2D" uid="uid://c5o8pw11gyxrj" path="res://assets/icons/send.svg" id="13_i3ywb"]
+[ext_resource type="Texture2D" uid="uid://dmr5s1os6aytf" path="res://assets/icons/clean.svg" id="13_pq70c"]
+[ext_resource type="PackedScene" uid="uid://cgj8k3i3lnurp" path="res://scenes/editor/emoji_panel_container.tscn" id="14_ja8tm"]
+[ext_resource type="Texture2D" uid="uid://bp24ne1yp7wkc" path="res://assets/icons/dir/down.svg" id="16_dropdown"]
+[ext_resource type="Texture2D" uid="uid://cpi3xkibbswdv" path="res://assets/icons/text-size.svg" id="16_svbvx"]
+[ext_resource type="Texture2D" uid="uid://djfsvbjsehhhm" path="res://assets/icons/setting.svg" id="22_r6jol"]
+[ext_resource type="PackedScene" uid="uid://6dtacltx2053" path="res://scenes/editor/image_gallery.tscn" id="30_gallery"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dhn8j"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhunq"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.9647059, 0.96862745, 0.972549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_80f58"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pq70c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r6jol"]
+content_margin_left = 18.0
+content_margin_top = 8.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+bg_color = Color(0.15686275, 0.5647059, 0.8, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ae1hd"]
+content_margin_left = 18.0
+content_margin_top = 8.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+bg_color = Color(0.32850412, 0.7032361, 0.9432521, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hx1gb"]
+content_margin_left = 18.0
+content_margin_top = 8.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+bg_color = Color(0.21477917, 0.6282614, 0.87586874, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hg2ka"]
+content_margin_left = 18.0
+content_margin_top = 8.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+bg_color = Color(0.8, 0.23921569, 0.26666668, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lt3wf"]
+content_margin_left = 18.0
+content_margin_top = 8.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+bg_color = Color(0.9337424, 0.3999292, 0.39971185, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f0t63"]
+content_margin_left = 18.0
+content_margin_top = 8.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+bg_color = Color(0.91070205, 0.34295535, 0.35379726, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qnluh"]
+content_margin_left = 18.0
+content_margin_top = 8.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+bg_color = Color(0.15686275, 0.5647059, 0.8, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Editor" type="Control" unique_id=1500848079]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_b8rj3")
+script = ExtResource("1_bc6i7")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1023503195]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dhn8j")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=821181600]
+layout_mode = 2
+
+[node name="ToolBar" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=355564735]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bhunq")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ToolBar" unique_id=894358239]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TextBoldButton" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer" unique_id=150235111 instance=ExtResource("2_pq70c")]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("2_5cfe8")
+
+[node name="TextItalicButton" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer" unique_id=1909172064 instance=ExtResource("2_pq70c")]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("3_7gtdv")
+
+[node name="TextUnderlineButton" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer" unique_id=553890247 instance=ExtResource("2_pq70c")]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("4_jwsr6")
+
+[node name="TextDeleteButton" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer" unique_id=375666824 instance=ExtResource("2_pq70c")]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("5_ro56m")
+
+[node name="TextColorButtons" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer" unique_id=221799469]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextColorButton" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer/TextColorButtons" unique_id=698045753 instance=ExtResource("2_pq70c")]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("6_5q5vg")
+
+[node name="TextColorTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer/TextColorButtons/TextColorButton" unique_id=1505053995]
+unique_name_in_owner = true
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_rolao")
+stretch_mode = 2
+
+[node name="TextColorDropdownButton" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer/TextColorButtons" unique_id=1008383109 instance=ExtResource("2_pq70c")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+tooltip_text = "选择颜色"
+theme_override_constants/icon_max_width = 12
+icon = ExtResource("16_dropdown")
+
+[node name="TextColorPickerView" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer/TextColorButtons/TextColorDropdownButton" unique_id=388117775 instance=ExtResource("9_oljq2")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 204.0
+offset_top = 55.0
+offset_right = 512.0
+offset_bottom = 558.0
+
+[node name="TextBgColorButtons" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer" unique_id=334698197]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextBgColorButton" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer/TextBgColorButtons" unique_id=410048599 instance=ExtResource("2_pq70c")]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("10_qnluh")
+
+[node name="TextBgColorTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer/TextBgColorButtons/TextBgColorButton" unique_id=1514622430]
+unique_name_in_owner = true
+modulate = Color(0.60933006, 0.6093301, 0.60933006, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_i3ywb")
+stretch_mode = 2
+
+[node name="TextBgColorDropdownButton" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer/TextBgColorButtons" unique_id=1880576014 instance=ExtResource("2_pq70c")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+tooltip_text = "选择颜色"
+theme_override_constants/icon_max_width = 12
+icon = ExtResource("16_dropdown")
+
+[node name="TextBgColorPickerView" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer/TextBgColorButtons/TextBgColorDropdownButton" unique_id=1741874208 instance=ExtResource("9_oljq2")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 255.0
+offset_top = 55.0
+offset_right = 563.0
+offset_bottom = 558.0
+
+[node name="EmojiButton" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer" unique_id=2084846858 instance=ExtResource("2_pq70c")]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("8_p4u40")
+
+[node name="EmojiPanelContainer" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer/EmojiButton" unique_id=1059541183 instance=ExtResource("14_ja8tm")]
+visible = false
+layout_mode = 0
+
+[node name="ImageButton" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer" unique_id=1528085766 instance=ExtResource("2_pq70c")]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("9_syr16")
+
+[node name="ImageGallery" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer/ImageButton" unique_id=1420952746 instance=ExtResource("30_gallery")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+theme = ExtResource("1_b8rj3")
+
+[node name="TextSizeContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer" unique_id=1707909753]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="TextSizeButton" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer/TextSizeContainer" unique_id=556795627 instance=ExtResource("2_pq70c")]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("16_svbvx")
+
+[node name="TextSizeSpinBox" type="SpinBox" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer/TextSizeContainer" unique_id=1221459283]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_icons/up = ExtResource("10_ja8tm")
+theme_override_icons/up_hover = ExtResource("10_ja8tm")
+theme_override_icons/up_pressed = ExtResource("10_ja8tm")
+theme_override_icons/up_disabled = ExtResource("10_ja8tm")
+theme_override_icons/down = ExtResource("16_dropdown")
+theme_override_icons/down_hover = ExtResource("16_dropdown")
+theme_override_icons/down_pressed = ExtResource("16_dropdown")
+theme_override_icons/down_disabled = ExtResource("16_dropdown")
+
+[node name="TextEdit" type="TextEdit" parent="PanelContainer/VBoxContainer" unique_id=2063646449]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
+theme_override_colors/selection_color = Color(0, 0.47058824, 0.90588236, 0.9019608)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/caret_width = 1
+theme_override_constants/line_spacing = 6
+theme_override_fonts/font = ExtResource("2_m0is4")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_80f58")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pq70c")
+deselect_on_focus_loss_enabled = false
+wrap_mode = 1
+scroll_smooth = true
+scroll_past_end_of_file = true
+scroll_fit_content_width = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=895822468]
+layout_mode = 2
+
+[node name="SettingButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1800607165]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_constants/h_separation = 6
+theme_override_constants/icon_max_width = 30
+theme_override_fonts/font = ExtResource("2_m0is4")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_r6jol")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ae1hd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hx1gb")
+text = "设置"
+icon = ExtResource("22_r6jol")
+
+[node name="ResetButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=32760446]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_constants/h_separation = 6
+theme_override_constants/icon_max_width = 30
+theme_override_fonts/font = ExtResource("2_m0is4")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_hg2ka")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_lt3wf")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f0t63")
+text = "清空"
+icon = ExtResource("13_pq70c")
+
+[node name="SendButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=2015424441]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_constants/h_separation = 6
+theme_override_constants/icon_max_width = 30
+theme_override_fonts/font = ExtResource("2_m0is4")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_qnluh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ae1hd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hx1gb")
+text = "发送"
+icon = ExtResource("13_i3ywb")
