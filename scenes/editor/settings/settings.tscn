@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dfu5lwhq2wcda"]
 
 [ext_resource type="Script" uid="uid://c6wjvkul3n1fl" path="res://scripts/scenes/editor/settings/settings.gd" id="1_caek6"]
+[ext_resource type="Theme" uid="uid://d0xywxv1w7ast" path="res://assets/styles/editor/apple_editor.tres" id="1_ilsiy"]
 [ext_resource type="Texture2D" uid="uid://dbb744fjhxfp0" path="res://assets/icons/reset.svg" id="3_reset"]
 [ext_resource type="PackedScene" uid="uid://bjv0xvguuersf" path="res://scenes/editor/editor_tool_button.tscn" id="4_tool_button"]
 [ext_resource type="PackedScene" uid="uid://mkmy1ntbr868" path="res://scenes/editor/settings/bubble_settings.tscn" id="5_bubble_settings"]
@@ -70,6 +71,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_ilsiy")
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 script = ExtResource("1_caek6")
 
@@ -87,7 +89,6 @@ theme_override_constants/separation = 16
 [node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer" unique_id=1422212904]
 layout_mode = 2
 size_flags_vertical = 3
-mouse_default_cursor_shape = 2
 theme_override_colors/font_selected_color = Color(0.1, 0.38, 0.6, 1)
 theme_override_colors/font_hovered_color = Color(0.1, 0.38, 0.6, 1)
 theme_override_colors/font_unselected_color = Color(0.34, 0.39, 0.44, 1)
@@ -113,6 +114,52 @@ metadata/_tab_index = 0
 layout_mode = 2
 theme_override_constants/separation = 12
 
+[node name="SenderRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields" unique_id=1771051659]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="SenderLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/SenderRow" unique_id=1774239180]
+layout_mode = 2
+text = "说话人"
+
+[node name="SenderNameEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/SenderRow" unique_id=1681793627]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "忆梦"
+placeholder_text = "说话人名称"
+
+[node name="SenderResetButton" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/SenderRow" unique_id=361897680 instance=ExtResource("4_tool_button")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "还原默认说话人"
+theme_override_constants/icon_max_width = 20
+icon = ExtResource("3_reset")
+
+[node name="VoiceVolumeRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields" unique_id=497084264]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/VoiceVolumeRow" unique_id=2007502606]
+layout_mode = 2
+text = "音效音量"
+
+[node name="VoiceVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/VoiceVolumeRow" unique_id=73046637]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+value = 100.0
+
+[node name="VoiceVolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/VoiceVolumeRow" unique_id=1865914525]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+text = "100%"
+horizontal_alignment = 2
+
 [node name="VoiceLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields" unique_id=838310023]
 layout_mode = 2
 text = "默认音效路径"
@@ -124,12 +171,13 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "音效文件路径（WAV / OGG / MP3），留空关闭音效"
+placeholder_text = "音效文件路径"
 
 [node name="VoiceBrowseButton" type="Button" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/VoiceRow" unique_id=1375997177]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "浏览…"
 
 [node name="VoiceResetButton" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/VoiceRow" unique_id=346543333 instance=ExtResource("4_tool_button")]
@@ -137,6 +185,35 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "还原默认音效"
+theme_override_constants/icon_max_width = 20
+icon = ExtResource("3_reset")
+
+[node name="EmojiFontLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields"]
+layout_mode = 2
+text = "Emoji 字体"
+
+[node name="EmojiFontRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields"]
+layout_mode = 2
+
+[node name="EmojiFontPathEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/EmojiFontRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "留空使用内置 Emoji 字体"
+tooltip_text = "留空时使用 res://assets/fonts/emoji.ttf"
+
+[node name="EmojiFontBrowseButton" type="Button" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/EmojiFontRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "浏览…"
+
+[node name="EmojiFontResetButton" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/EmojiFontRow" instance=ExtResource("4_tool_button")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "还原默认 Emoji 字体（留空）"
 theme_override_constants/icon_max_width = 20
 icon = ExtResource("3_reset")
 
@@ -164,12 +241,6 @@ layout_mode = 2
 tooltip_text = "还原默认停留时长（2 秒）"
 theme_override_constants/icon_max_width = 20
 icon = ExtResource("3_reset")
-
-[node name="FadeOutHint" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields" unique_id=1074693688]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.42, 0.47, 0.53, 1)
-text = "文字全部打印完成后等待，再淡出气泡。设为 0 时直接淡出。"
-autowrap_mode = 3
 
 [node name="FontSettings" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer" unique_id=2121824595]
 visible = false
@@ -213,12 +284,13 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "字体文件路径（TTF / OTF / TTC）"
+placeholder_text = "字体文件路径"
 
 [node name="FontBrowseButton" type="Button" parent="MarginContainer/VBoxContainer/TabContainer/FontSettings/Fields/FontRow" unique_id=1642743073]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "浏览…"
 
 [node name="SizeRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/FontSettings/Fields" unique_id=924383883]
@@ -282,6 +354,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(110, 40)
 layout_mode = 2
 size_flags_horizontal = 8
+mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
@@ -293,6 +366,7 @@ text = "确认"
 
 [node name="ResourceFileDialog" type="FileDialog" parent="." unique_id=1322964586]
 unique_name_in_owner = true
+oversampling_override = 1.0
 title = "Open a File"
 size = Vector2i(900, 600)
 file_mode = 0

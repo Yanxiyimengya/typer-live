@@ -3,6 +3,9 @@ extends Control;
 
 signal print_char(char : String);
 
+const DECORATION_ITEM : PackedScene = preload("res://scenes/live/dialog/decoration_item.tscn");
+var _decoration_items : Array = [];
+
 @export_multiline() var text : String = "";
 @export var delay : float = 1;
 @export var voice : AudioStream;
@@ -43,6 +46,8 @@ func _ready() -> void:
 	dialog_text_label = self.get_node("%DialogTextLabel");
 	sender_text_label = self.get_node("%SenderTextLabel");
 	continue_indicator = self.get_node("%ContinueIndicator");
+	resized.connect(_layout_decorations);
+	$DecorationItemsLayer.item_rect_changed.connect(_layout_decorations);
 	var pulse : Tween = create_tween().set_loops();
 	pulse.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT);
 	pulse.tween_property(continue_indicator, "modulate:a", 0.35, 0.8);
@@ -52,30 +57,53 @@ func _ready() -> void:
 	_apply_settings();
 
 func _apply_settings() -> void:
+	sender_text_label.text = GlobalSettings.sender_name;
 	font = GlobalSettings.default_font;
 	font_size = GlobalSettings.font_size;
 	font_color = GlobalSettings.font_color;
 	voice = GlobalSettings.default_voice;
 	apply_bubble_styles(GlobalSettings.bubble_style, GlobalSettings.sender_style);
+	apply_item_decorations(GlobalSettings.decoration_items);
 	dialog_text_label.add_theme_color_override("default_color", font_color);
 	for label : RichTextLabel in [dialog_text_label, sender_text_label]:
 		for style : String in ["normal", "bold", "italics", "bold_italics"]:
-			if font != null:
-				label.add_theme_font_override(style + "_font", font);
-			else:
-				label.remove_theme_font_override(style + "_font");
+			label.remove_theme_font_override(style + "_font");
+			var base_font : Font = font if font != null else label.get_theme_font(style + "_font");
+			label.add_theme_font_override(style + "_font", GlobalSettings.with_emoji_font(base_font));
 			label.add_theme_font_size_override(style + "_font_size", font_size);
 
 func apply_bubble_styles(body : Dictionary, sender : Dictionary) -> void:
 	get_node("VBoxContainer/PanelContainer").add_theme_stylebox_override("panel", GlobalSettings.make_style(body));
 	get_node("VBoxContainer/SenderPanelContainer").add_theme_stylebox_override("panel", GlobalSettings.make_style(sender));
 	var decorations : bool = body.get("decorations", true);
-	get_node("DecorationLayer").visible = decorations;
-	get_node("VBoxContainer/PanelContainer/InnerFrame").visible = decorations and int(body.get("mode", 0)) == 0;
-	get_node("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Footer/Stars").visible = decorations;
+
+func apply_item_decorations(items : Array) -> void:
+	_decoration_items = items.duplicate(true);
+	var layer : Control = %DecorationItemsLayer;
+	while layer.get_child_count() > items.size():
+		var item : Node = layer.get_child(layer.get_child_count() - 1);
+		layer.remove_child(item);
+		item.queue_free();
+	while layer.get_child_count() < items.size():
+		layer.add_child(DECORATION_ITEM.instantiate());
+	for index in range(items.size()):
+		var item : TextureRect = layer.get_child(index);
+		item.texture = GlobalResourceLoader.load_image(items[index].path);
+		item.visible = items[index].get("visible", true);
+	_layout_decorations();
+
+func _layout_decorations() -> void:
+	for index in range(_decoration_items.size()):
+		var data : Dictionary = _decoration_items[index];
+		var item : TextureRect = %DecorationItemsLayer.get_child(index);
+		item.size = data.size;
+		item.pivot_offset = item.size / 2.0;
+		item.scale = data.scale;
+		item.rotation_degrees = data.rotation;
+		item.position = size * data.anchor + data.position - %DecorationItemsLayer.position;
 
 func _process(delta: float) -> void:
-	continue_indicator.visible = not text.is_empty() and is_completed();
+	continue_indicator.visible = not text.is_empty() && is_completed();
 	_print_timer -= delta;
 	if (_print_timer <= 0) :
 		_print_timer = delay;
@@ -84,7 +112,7 @@ func _process(delta: float) -> void:
 			while(_progress < text_len && text[_progress] == '[') : 
 				var start_pos : int = _progress + 1;
 				var end_pos : int = _bbcode_end(_progress);
-				if end_pos == -1:
+				if (end_pos == -1):
 					break;
 				var bbcode_content : String = text.substr(start_pos, end_pos - start_pos);
 				_progress = end_pos + 1;
@@ -116,13 +144,13 @@ func _bbcode_end(start : int) -> int:
 	var escaped : bool = false;
 	for index in range(start + 1, text.length()):
 		var c : String = text[index];
-		if escaped:
+		if (escaped):
 			escaped = false;
-		elif quoted and c == "\\":
+		elif (quoted && c == "\\"):
 			escaped = true;
-		elif c == '"':
+		elif (c == '"'):
 			quoted = not quoted;
-		elif c == "]" and not quoted:
+		elif (c == "]" && not quoted):
 			return index;
 	return -1;
 
@@ -209,7 +237,7 @@ func _proc_bbcode(cmd : String, _args : Dictionary[String, Variant]) -> bool:
 				if (_args.has("path")) : 
 					var img_path : String = _args["path"];
 					var texture : ImageTexture = GlobalResourceLoader.load_image(img_path);
-					if texture == null:
+					if (texture == null):
 						return true;
 					var img_size : Vector2 = Vector2.ZERO;
 					

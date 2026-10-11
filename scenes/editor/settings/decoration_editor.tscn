@@ -1,0 +1,378 @@
+[gd_scene format=3 uid="uid://nb6wa18ad4ey"]
+
+[ext_resource type="Script" uid="uid://ddbdsdb81r6td" path="res://scripts/scenes/editor/settings/decoration_editor.gd" id="1_editor"]
+[ext_resource type="Script" uid="uid://cv720b71i8b3u" path="res://scripts/scenes/editor/settings/decoration_canvas.gd" id="2_canvas"]
+[ext_resource type="Script" uid="uid://cduo7nx6vqk6k" path="res://scripts/scenes/editor/settings/decoration_canvas_overlay.gd" id="3_overlay"]
+[ext_resource type="PackedScene" uid="uid://mktqxxetav5y" path="res://scenes/live/dialog/dialog_bubble.tscn" id="4_bubble"]
+[ext_resource type="Script" uid="uid://dkh2j17ux6pv0" path="res://scripts/scenes/editor/settings/decoration_nodes.gd" id="5_nodes"]
+
+[sub_resource type="StyleBoxFlat" id="SidebarPanel"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.96, 0.97, 0.98, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="NodeListPanel"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.83, 0.87, 0.91, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="NodeSelected"]
+bg_color = Color(0.88, 0.94, 0.98, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="ButtonGroup" id="TransformTools"]
+
+[node name="DecorationEditor" type="HSplitContainer" unique_id=489797924]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+script = ExtResource("1_editor")
+
+[node name="Sidebar" type="PanelContainer" parent="." unique_id=178023810]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("SidebarPanel")
+
+[node name="SidebarContent" type="VSplitContainer" parent="Sidebar" unique_id=62394821]
+layout_mode = 2
+theme_override_constants/separation = 8
+split_offsets = PackedInt32Array(153)
+split_offset = 153
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Sidebar/SidebarContent" unique_id=1257476882]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Sidebar/SidebarContent/VBoxContainer" unique_id=341267366]
+layout_mode = 2
+text = "场景节点"
+
+[node name="Actions" type="HBoxContainer" parent="Sidebar/SidebarContent/VBoxContainer" unique_id=405100480]
+layout_mode = 2
+
+[node name="AddDecorationButton" type="Button" parent="Sidebar/SidebarContent/VBoxContainer/Actions" unique_id=972581476]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "＋ 添加图片"
+
+[node name="RemoveDecorationButton" type="Button" parent="Sidebar/SidebarContent/VBoxContainer/Actions" unique_id=315268310]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+tooltip_text = "删除选中物件（Delete）"
+mouse_default_cursor_shape = 2
+disabled = true
+text = "删除"
+
+[node name="ClearDecorationsButton" type="Button" parent="Sidebar/SidebarContent/VBoxContainer/Actions" unique_id=838862838]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "还原"
+
+[node name="LayerHint" type="Label" parent="Sidebar/SidebarContent/VBoxContainer" unique_id=41062893]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42, 0.47, 0.53, 1)
+text = "拖拽排序 · 越靠上越靠前"
+
+[node name="DecorationNodes" type="Tree" parent="Sidebar/SidebarContent/VBoxContainer" unique_id=991867199]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.24, 0.29, 0.34, 1)
+theme_override_colors/font_hovered_selected_color = Color(0, 0.5803922, 0.8156863, 1)
+theme_override_colors/font_selected_color = Color(0.1, 0.38, 0.6, 1)
+theme_override_styles/panel = SubResource("NodeListPanel")
+theme_override_styles/hovered_selected = SubResource("NodeSelected")
+theme_override_styles/selected = SubResource("NodeSelected")
+theme_override_styles/selected_focus = SubResource("NodeSelected")
+columns = 2
+column_titles_visible = true
+hide_root = true
+select_mode = 1
+script = ExtResource("5_nodes")
+
+[node name="InspectorScroll" type="ScrollContainer" parent="Sidebar/SidebarContent" unique_id=451027964]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="DecorationInspector" type="VBoxContainer" parent="Sidebar/SidebarContent/InspectorScroll" unique_id=1645371416]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="NameTitle" type="Label" parent="Sidebar/SidebarContent/InspectorScroll/DecorationInspector" unique_id=760887698]
+layout_mode = 2
+text = "节点名称"
+
+[node name="DecorationNameEdit" type="LineEdit" parent="Sidebar/SidebarContent/InspectorScroll/DecorationInspector" unique_id=1359789186]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DecorationVisible" type="CheckBox" parent="Sidebar/SidebarContent/InspectorScroll/DecorationInspector" unique_id=712918515]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+text = "可见性"
+
+[node name="LayerLabel" type="Label" parent="Sidebar/SidebarContent/InspectorScroll/DecorationInspector" unique_id=518377688]
+layout_mode = 2
+text = "层级 / 数值越大越靠前"
+
+[node name="DecorationLayer" type="SpinBox" parent="Sidebar/SidebarContent/InspectorScroll/DecorationInspector" unique_id=746878051]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 1.0
+value = 1.0
+
+[node name="PositionLabel" type="Label" parent="Sidebar/SidebarContent/InspectorScroll/DecorationInspector" unique_id=1993866678]
+layout_mode = 2
+text = "位置 / px"
+
+[node name="PositionRow" type="HBoxContainer" parent="Sidebar/SidebarContent/InspectorScroll/DecorationInspector" unique_id=95888364]
+layout_mode = 2
+
+[node name="PositionXLabel" type="Label" parent="Sidebar/SidebarContent/InspectorScroll/DecorationInspector/PositionRow" unique_id=720484696]
+layout_mode = 2
+text = "X"
+
+[node name="PositionX" type="SpinBox" parent="Sidebar/SidebarContent/InspectorScroll/DecorationInspector/PositionRow" unique_id=522578097]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -8192.0
+max_value = 8192.0
+allow_greater = true
+allow_lesser = true
+
+[node name="PositionYLabel" type="Label" parent="Sidebar/SidebarContent/InspectorScroll/DecorationInspector/PositionRow" unique_id=544331743]
+layout_mode = 2
+text = "Y"
+
+[node name="PositionY" type="SpinBox" parent="Sidebar/SidebarContent/InspectorScroll/DecorationInspector/PositionRow" unique_id=734680063]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -8192.0
+max_value = 8192.0
+allow_greater = true
+allow_lesser = true
+
+[node name="ScaleLabel" type="Label" parent="Sidebar/SidebarContent/InspectorScroll/DecorationInspector" unique_id=2056990166]
+layout_mode = 2
+text = "缩放"
+
+[node name="ScaleRow" type="HBoxContainer" parent="Sidebar/SidebarContent/InspectorScroll/DecorationInspector" unique_id=166860692]
+layout_mode = 2
+
+[node name="ScaleXLabel" type="Label" parent="Sidebar/SidebarContent/InspectorScroll/DecorationInspector/ScaleRow" unique_id=18763399]
+layout_mode = 2
+text = "X"
+
+[node name="ScaleX" type="SpinBox" parent="Sidebar/SidebarContent/InspectorScroll/DecorationInspector/ScaleRow" unique_id=1365070637]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.05
+max_value = 20.0
+step = 0.05
+value = 1.0
+
+[node name="ScaleYLabel" type="Label" parent="Sidebar/SidebarContent/InspectorScroll/DecorationInspector/ScaleRow" unique_id=1461709620]
+layout_mode = 2
+text = "Y"
+
+[node name="ScaleY" type="SpinBox" parent="Sidebar/SidebarContent/InspectorScroll/DecorationInspector/ScaleRow" unique_id=2112989001]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.05
+max_value = 20.0
+step = 0.05
+value = 1.0
+
+[node name="RotationLabel" type="Label" parent="Sidebar/SidebarContent/InspectorScroll/DecorationInspector" unique_id=2043011566]
+layout_mode = 2
+text = "旋转 / °"
+
+[node name="RotationRow" type="HBoxContainer" parent="Sidebar/SidebarContent/InspectorScroll/DecorationInspector" unique_id=1070612338]
+layout_mode = 2
+
+[node name="DecorationRotation" type="SpinBox" parent="Sidebar/SidebarContent/InspectorScroll/DecorationInspector/RotationRow" unique_id=1370030681]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -360.0
+max_value = 360.0
+allow_greater = true
+allow_lesser = true
+
+[node name="Workspace" type="VBoxContainer" parent="." unique_id=902030745]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Toolbar" type="HBoxContainer" parent="Workspace" unique_id=1914410939]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="MoveTool" type="Button" parent="Workspace/Toolbar" unique_id=2101516828]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("TransformTools")
+text = "移动"
+
+[node name="ScaleTool" type="Button" parent="Workspace/Toolbar" unique_id=368577178]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_group = SubResource("TransformTools")
+text = "缩放"
+
+[node name="RotateTool" type="Button" parent="Workspace/Toolbar" unique_id=476121420]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_group = SubResource("TransformTools")
+text = "旋转"
+
+[node name="Spacer" type="Control" parent="Workspace/Toolbar" unique_id=657839910]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AnchorLabel" type="Label" parent="Workspace/Toolbar" unique_id=795067450]
+layout_mode = 2
+text = "对齐"
+
+[node name="AnchorOption" type="OptionButton" parent="Workspace/Toolbar" unique_id=570191283]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+selected = 4
+item_count = 9
+popup/item_0/text = "左上"
+popup/item_0/id = 0
+popup/item_1/text = "顶部居中"
+popup/item_1/id = 1
+popup/item_2/text = "右上"
+popup/item_2/id = 2
+popup/item_3/text = "左侧居中"
+popup/item_3/id = 3
+popup/item_4/text = "居中"
+popup/item_4/id = 4
+popup/item_5/text = "右侧居中"
+popup/item_5/id = 5
+popup/item_6/text = "左下"
+popup/item_6/id = 6
+popup/item_7/text = "底部居中"
+popup/item_7/id = 7
+popup/item_8/text = "右下"
+popup/item_8/id = 8
+
+[node name="SnapToGrid" type="CheckButton" parent="Workspace/Toolbar" unique_id=884027888]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+tooltip_text = "移动时吸附至 10 px 网格"
+text = "吸附"
+
+[node name="DecorationCanvas" type="Control" parent="Workspace" unique_id=179104194]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 260)
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 2
+script = ExtResource("2_canvas")
+
+[node name="ViewportContainer" type="SubViewportContainer" parent="Workspace/DecorationCanvas" unique_id=2005644648]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 168.75
+offset_right = 844.0
+offset_bottom = 468.75
+scale = Vector2(0.985, 0.985)
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="Workspace/DecorationCanvas/ViewportContainer" unique_id=1188687781]
+transparent_bg = true
+handle_input_locally = false
+gui_disable_input = true
+size = Vector2i(800, 300)
+render_target_update_mode = 4
+
+[node name="DialogBubble" parent="Workspace/DecorationCanvas/ViewportContainer/SubViewport" unique_id=1811924615 instance=ExtResource("4_bubble")]
+
+[node name="DialogTextLabel" parent="Workspace/DecorationCanvas/ViewportContainer/SubViewport/DialogBubble/VBoxContainer/PanelContainer/VBoxContainer" parent_id_path=PackedInt32Array(1811924615, 1871255080) index="0" unique_id=1826978105]
+text = "把喜欢的图片，装饰在你的气泡上。"
+
+[node name="Overlay" type="Control" parent="Workspace/DecorationCanvas" unique_id=95944296]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_overlay")
+
+[node name="ImportDecorationDialog" type="FileDialog" parent="." unique_id=1157249021]
+unique_name_in_owner = true
+title = "Open a File"
+size = Vector2i(900, 600)
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png,*.jpg,*.jpeg,*.webp,*.bmp,*.svg;图片")
+use_native_dialog = true
+
+[node name="DecorationImportError" type="AcceptDialog" parent="." unique_id=1324272342]
+unique_name_in_owner = true
+title = "图片导入失败"
+ok_button_text = "确定"
+
+[editable path="Workspace/DecorationCanvas/ViewportContainer/SubViewport/DialogBubble"]

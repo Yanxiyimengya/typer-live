@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://mktqxxetav5y" path="res://scenes/live/dialog/dialog_bubble.tscn" id="1_4wm3x"]
 [ext_resource type="Script" uid="uid://c26l0ux30kd4j" path="res://scripts/scenes/live/live.gd" id="1_g5ffh"]
 [ext_resource type="Script" uid="uid://bwadx7jwvo4ac" path="res://scripts/scenes/live/anim_translate.gd" id="2_80f58"]
-[ext_resource type="FontFile" uid="uid://ck7fwtbw1dcjv" path="res://assets/fonts/Default.otf" id="4_dsmgv"]
+[ext_resource type="FontFile" uid="uid://ck7fwtbw1dcjv" path="res://assets/fonts/default.otf" id="4_dsmgv"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dn5cr"]
 
@@ -106,21 +106,16 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_dn5cr")
 font = ExtResource("4_dsmgv")
 
 [node name="SenderPanelContainer" parent="AnimTranslate/DialogBubble/VBoxContainer" parent_id_path=PackedInt32Array(2018850484, 768980022) index="0" unique_id=1297553357]
-z_index = 1
 custom_minimum_size = Vector2(0, 0)
 theme_override_styles/panel = SubResource("StyleBoxFlat_dn5cr")
 
 [node name="SenderTextLabel" parent="AnimTranslate/DialogBubble/VBoxContainer/SenderPanelContainer" index="0" unique_id=578394804]
 text = "你好"
 
-[node name="MarginContainer" parent="AnimTranslate/DialogBubble/VBoxContainer/PanelContainer" parent_id_path=PackedInt32Array(2018850484, 428902698) index="0" unique_id=1466521957]
+[node name="MarginContainer" parent="AnimTranslate/DialogBubble/VBoxContainer/PanelContainer" parent_id_path=PackedInt32Array(2018850484, 428902698) index="1" unique_id=1466521957]
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
-
-[node name="DialogTextLabel" parent="AnimTranslate/DialogBubble/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(2018850484, 1871255080) index="0" unique_id=1826978105]
-fit_content = false
-scroll_following = true
 
 [node name="FadingAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1264847143]
 unique_name_in_owner = true

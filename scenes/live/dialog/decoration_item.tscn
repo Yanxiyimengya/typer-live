@@ -1,0 +1,7 @@
+[gd_scene format=3]
+
+[node name="DecorationItem" type="TextureRect"]
+size = Vector2(160, 120)
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5

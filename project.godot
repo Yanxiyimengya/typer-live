@@ -13,7 +13,10 @@ config_version=5
 config/name="TyperLive"
 run/main_scene="uid://cd3rox1int1x4"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
+boot_splash/stretch_mode=0
+boot_splash/use_filter=false
 
 [autoload]
 
@@ -24,6 +27,7 @@ GlobalResourceLoader="*res://scripts/autoloads/global_resource_loader/global_res
 
 [display]
 
+window/energy_saving/keep_screen_on=false
 window/subwindows/embed_subwindows=false
 window/stretch/aspect="expand"
 window/per_pixel_transparency/allowed=true
@@ -44,3 +48,6 @@ folder_colors={
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/screen_space_roughness_limiter/enabled=false
+environment/screen_space_reflection/half_size=false
+rendering_device/vsync/vsync_mode=1

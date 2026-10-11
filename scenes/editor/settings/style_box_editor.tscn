@@ -1,7 +1,7 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cy5ntp8fprrjg"]
 
-[ext_resource type="Script" path="res://scripts/scenes/editor/settings/style_box_editor.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/icons/reset.svg" id="2_reset"]
+[ext_resource type="Script" uid="uid://cjwvwpe00xqmp" path="res://scripts/scenes/editor/settings/style_box_editor.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dbb744fjhxfp0" path="res://assets/icons/reset.svg" id="2_reset"]
 
 [sub_resource type="StyleBoxFlat" id="ColorButton"]
 content_margin_left = 4.0
@@ -16,18 +16,23 @@ border_width_bottom = 1
 border_color = Color(0.57, 0.57, 0.57, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
-corner_radius_bottom_left = 5
 corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
-[node name="StyleBoxEditor" type="VBoxContainer"]
+[node name="StyleBoxEditor" type="VBoxContainer" unique_id=1300685764]
 custom_minimum_size = Vector2(360, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 10
 script = ExtResource("1_script")
 
-[node name="Header" type="HBoxContainer" parent="."]
+[node name="Header" type="HBoxContainer" parent="." unique_id=239520475]
 layout_mode = 2
 
-[node name="ModeButton" type="OptionButton" parent="Header"]
+[node name="ModeButton" type="OptionButton" parent="Header" unique_id=1961285268]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -40,314 +45,304 @@ popup/item_1/id = 1
 popup/item_2/text = "图像纹理 · 九宫格"
 popup/item_2/id = 2
 
-[node name="ResetStyleButton" type="Button" parent="Header"]
+[node name="ResetStyleButton" type="Button" parent="Header" unique_id=2013779901]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "还原此对象的默认样式"
 theme_override_constants/icon_max_width = 20
 icon = ExtResource("2_reset")
 
-[node name="Scroll" type="ScrollContainer" parent="."]
+[node name="Scroll" type="ScrollContainer" parent="." unique_id=2062565398]
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="Fields" type="VBoxContainer" parent="Scroll"]
+[node name="Fields" type="VBoxContainer" parent="Scroll" unique_id=548992886]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
-[node name="FlatFields" type="VBoxContainer" parent="Scroll/Fields"]
+[node name="FlatFields" type="VBoxContainer" parent="Scroll/Fields" unique_id=1066588597]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="BackgroundPickerRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields"]
+[node name="BackgroundPickerRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields" unique_id=1400875607]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/BackgroundPickerRow"]
+[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/BackgroundPickerRow" unique_id=1946157927]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 text = "背景颜色"
 
-[node name="BackgroundPicker" type="ColorPickerButton" parent="Scroll/Fields/FlatFields/BackgroundPickerRow"]
+[node name="BackgroundPicker" type="ColorPickerButton" parent="Scroll/Fields/FlatFields/BackgroundPickerRow" unique_id=391334265]
 unique_name_in_owner = true
-layout_mode = 2
-metadata/style_key = "background"
 custom_minimum_size = Vector2(72, 30)
-color = Color(0.20, 0.13, 0.25, 0.96)
+layout_mode = 2
 theme_override_styles/normal = SubResource("ColorButton")
-theme_override_styles/hover = SubResource("ColorButton")
 theme_override_styles/pressed = SubResource("ColorButton")
+theme_override_styles/hover = SubResource("ColorButton")
 theme_override_styles/hover_pressed = SubResource("ColorButton")
+color = Color(0.2, 0.13, 0.25, 0.96)
+metadata/style_key = "background"
 
-[node name="BorderPickerRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields"]
+[node name="BorderPickerRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields" unique_id=1057052758]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/BorderPickerRow"]
+[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/BorderPickerRow" unique_id=1724548623]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 text = "边框颜色"
 
-[node name="BorderPicker" type="ColorPickerButton" parent="Scroll/Fields/FlatFields/BorderPickerRow"]
+[node name="BorderPicker" type="ColorPickerButton" parent="Scroll/Fields/FlatFields/BorderPickerRow" unique_id=481944466]
 unique_name_in_owner = true
-layout_mode = 2
-metadata/style_key = "border_color"
 custom_minimum_size = Vector2(72, 30)
-color = Color(1, 0.81, 0.87, 0.96)
+layout_mode = 2
 theme_override_styles/normal = SubResource("ColorButton")
-theme_override_styles/hover = SubResource("ColorButton")
 theme_override_styles/pressed = SubResource("ColorButton")
+theme_override_styles/hover = SubResource("ColorButton")
 theme_override_styles/hover_pressed = SubResource("ColorButton")
+color = Color(1, 0.81, 0.87, 0.96)
+metadata/style_key = "border_color"
 
-[node name="BorderWidthRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields"]
+[node name="BorderWidthRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields" unique_id=880271604]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/BorderWidthRow"]
+[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/BorderWidthRow" unique_id=1141067792]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 text = "边框宽度"
 
-[node name="BorderWidth" type="SpinBox" parent="Scroll/Fields/FlatFields/BorderWidthRow"]
+[node name="BorderWidth" type="SpinBox" parent="Scroll/Fields/FlatFields/BorderWidthRow" unique_id=562414102]
 unique_name_in_owner = true
-layout_mode = 2
-metadata/style_key = "border_width"
 custom_minimum_size = Vector2(90, 0)
-min_value = 0.0
+layout_mode = 2
 max_value = 32.0
 value = 2.0
+metadata/style_key = "border_width"
 
-[node name="RadiusRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields"]
+[node name="RadiusRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields" unique_id=916458536]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/RadiusRow"]
+[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/RadiusRow" unique_id=727404243]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 text = "圆角半径"
 
-[node name="Radius" type="SpinBox" parent="Scroll/Fields/FlatFields/RadiusRow"]
+[node name="Radius" type="SpinBox" parent="Scroll/Fields/FlatFields/RadiusRow" unique_id=1212885895]
 unique_name_in_owner = true
-layout_mode = 2
-metadata/style_key = "radius"
 custom_minimum_size = Vector2(90, 0)
-min_value = 0.0
+layout_mode = 2
 max_value = 128.0
 value = 24.0
+metadata/style_key = "radius"
 
-[node name="ShadowPickerRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields"]
+[node name="ShadowPickerRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields" unique_id=1095173216]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/ShadowPickerRow"]
+[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/ShadowPickerRow" unique_id=1823591565]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 text = "阴影颜色"
 
-[node name="ShadowPicker" type="ColorPickerButton" parent="Scroll/Fields/FlatFields/ShadowPickerRow"]
+[node name="ShadowPicker" type="ColorPickerButton" parent="Scroll/Fields/FlatFields/ShadowPickerRow" unique_id=1891831238]
 unique_name_in_owner = true
-layout_mode = 2
-metadata/style_key = "shadow_color"
 custom_minimum_size = Vector2(72, 30)
-color = Color(0.10, 0.05, 0.14, 0.20)
+layout_mode = 2
 theme_override_styles/normal = SubResource("ColorButton")
-theme_override_styles/hover = SubResource("ColorButton")
 theme_override_styles/pressed = SubResource("ColorButton")
+theme_override_styles/hover = SubResource("ColorButton")
 theme_override_styles/hover_pressed = SubResource("ColorButton")
+color = Color(0.1, 0.05, 0.14, 0.2)
+metadata/style_key = "shadow_color"
 
-[node name="ShadowSizeRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields"]
+[node name="ShadowSizeRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields" unique_id=1692143737]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/ShadowSizeRow"]
+[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/ShadowSizeRow" unique_id=1993223144]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 text = "阴影大小"
 
-[node name="ShadowSize" type="SpinBox" parent="Scroll/Fields/FlatFields/ShadowSizeRow"]
+[node name="ShadowSize" type="SpinBox" parent="Scroll/Fields/FlatFields/ShadowSizeRow" unique_id=1628311524]
 unique_name_in_owner = true
-layout_mode = 2
-metadata/style_key = "shadow_size"
 custom_minimum_size = Vector2(90, 0)
-min_value = 0.0
+layout_mode = 2
 max_value = 64.0
 value = 8.0
+metadata/style_key = "shadow_size"
 
-[node name="ShadowXRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields"]
+[node name="ShadowXRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields" unique_id=1724744864]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/ShadowXRow"]
+[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/ShadowXRow" unique_id=1014299561]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 text = "阴影偏移 X"
 
-[node name="ShadowX" type="SpinBox" parent="Scroll/Fields/FlatFields/ShadowXRow"]
+[node name="ShadowX" type="SpinBox" parent="Scroll/Fields/FlatFields/ShadowXRow" unique_id=1278253065]
 unique_name_in_owner = true
-layout_mode = 2
-metadata/style_key = "shadow_x"
 custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
 min_value = -128.0
 max_value = 128.0
-value = 0.0
+metadata/style_key = "shadow_x"
 
-[node name="ShadowYRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields"]
+[node name="ShadowYRow" type="HBoxContainer" parent="Scroll/Fields/FlatFields" unique_id=361680201]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/ShadowYRow"]
+[node name="Label" type="Label" parent="Scroll/Fields/FlatFields/ShadowYRow" unique_id=1686260647]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 text = "阴影偏移 Y"
 
-[node name="ShadowY" type="SpinBox" parent="Scroll/Fields/FlatFields/ShadowYRow"]
+[node name="ShadowY" type="SpinBox" parent="Scroll/Fields/FlatFields/ShadowYRow" unique_id=1672178113]
 unique_name_in_owner = true
-layout_mode = 2
-metadata/style_key = "shadow_y"
 custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
 min_value = -128.0
 max_value = 128.0
 value = 4.0
+metadata/style_key = "shadow_y"
 
-[node name="TextureFields" type="VBoxContainer" parent="Scroll/Fields"]
+[node name="TextureFields" type="VBoxContainer" parent="Scroll/Fields" unique_id=445622915]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="PathRow" type="HBoxContainer" parent="Scroll/Fields/TextureFields"]
+[node name="PathRow" type="HBoxContainer" parent="Scroll/Fields/TextureFields" unique_id=2068410022]
 layout_mode = 2
 
-[node name="TexturePathEdit" type="LineEdit" parent="Scroll/Fields/TextureFields/PathRow"]
+[node name="TexturePathEdit" type="LineEdit" parent="Scroll/Fields/TextureFields/PathRow" unique_id=487400690]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "纹理图片路径"
 
-[node name="BrowseButton" type="Button" parent="Scroll/Fields/TextureFields/PathRow"]
+[node name="BrowseButton" type="Button" parent="Scroll/Fields/TextureFields/PathRow" unique_id=1668723623]
 unique_name_in_owner = true
 layout_mode = 2
 text = "浏览…"
 
-[node name="TintPickerRow" type="HBoxContainer" parent="Scroll/Fields/TextureFields"]
+[node name="TintPickerRow" type="HBoxContainer" parent="Scroll/Fields/TextureFields" unique_id=904317646]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Scroll/Fields/TextureFields/TintPickerRow"]
+[node name="Label" type="Label" parent="Scroll/Fields/TextureFields/TintPickerRow" unique_id=1209567705]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 text = "纹理染色"
 
-[node name="TintPicker" type="ColorPickerButton" parent="Scroll/Fields/TextureFields/TintPickerRow"]
+[node name="TintPicker" type="ColorPickerButton" parent="Scroll/Fields/TextureFields/TintPickerRow" unique_id=1797002687]
 unique_name_in_owner = true
-layout_mode = 2
-metadata/style_key = "tint"
 custom_minimum_size = Vector2(72, 30)
-color = Color(1, 1, 1, 1)
+layout_mode = 2
 theme_override_styles/normal = SubResource("ColorButton")
-theme_override_styles/hover = SubResource("ColorButton")
 theme_override_styles/pressed = SubResource("ColorButton")
+theme_override_styles/hover = SubResource("ColorButton")
 theme_override_styles/hover_pressed = SubResource("ColorButton")
+color = Color(1, 1, 1, 1)
+metadata/style_key = "tint"
 
-[node name="TextureMarginsLabel" type="Label" parent="Scroll/Fields/TextureFields"]
+[node name="TextureMarginsLabel" type="Label" parent="Scroll/Fields/TextureFields" unique_id=391368920]
 layout_mode = 2
 text = "切片边距（左 / 上 / 右 / 下）"
 
-[node name="TextureMarginsRow" type="HBoxContainer" parent="Scroll/Fields/TextureFields"]
+[node name="TextureMarginsRow" type="HBoxContainer" parent="Scroll/Fields/TextureFields" unique_id=781233213]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Left" type="SpinBox" parent="Scroll/Fields/TextureFields/TextureMarginsRow"]
+[node name="Left" type="SpinBox" parent="Scroll/Fields/TextureFields/TextureMarginsRow" unique_id=1202762887]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "左"
 max_value = 512.0
 value = 24.0
 metadata/style_key = "texture_margins"
 metadata/side = 0
-tooltip_text = "左"
 
-[node name="Top" type="SpinBox" parent="Scroll/Fields/TextureFields/TextureMarginsRow"]
+[node name="Top" type="SpinBox" parent="Scroll/Fields/TextureFields/TextureMarginsRow" unique_id=1817294417]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "上"
 max_value = 512.0
 value = 24.0
 metadata/style_key = "texture_margins"
 metadata/side = 1
-tooltip_text = "上"
 
-[node name="Right" type="SpinBox" parent="Scroll/Fields/TextureFields/TextureMarginsRow"]
+[node name="Right" type="SpinBox" parent="Scroll/Fields/TextureFields/TextureMarginsRow" unique_id=2029261299]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "右"
 max_value = 512.0
 value = 24.0
 metadata/style_key = "texture_margins"
 metadata/side = 2
-tooltip_text = "右"
 
-[node name="Bottom" type="SpinBox" parent="Scroll/Fields/TextureFields/TextureMarginsRow"]
+[node name="Bottom" type="SpinBox" parent="Scroll/Fields/TextureFields/TextureMarginsRow" unique_id=682231996]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "下"
 max_value = 512.0
 value = 24.0
 metadata/style_key = "texture_margins"
 metadata/side = 3
-tooltip_text = "下"
 
-[node name="DrawCenter" type="CheckBox" parent="Scroll/Fields"]
+[node name="DrawCenter" type="CheckBox" parent="Scroll/Fields" unique_id=1174613539]
 unique_name_in_owner = true
 layout_mode = 2
 button_pressed = true
 text = "绘制中心区域"
 metadata/style_key = "draw_center"
 
-[node name="MarginsLabel" type="Label" parent="Scroll/Fields"]
+[node name="MarginsLabel" type="Label" parent="Scroll/Fields" unique_id=369486554]
 layout_mode = 2
 text = "内边距（左 / 上 / 右 / 下）"
 
-[node name="MarginsRow" type="HBoxContainer" parent="Scroll/Fields"]
+[node name="MarginsRow" type="HBoxContainer" parent="Scroll/Fields" unique_id=120257578]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Left" type="SpinBox" parent="Scroll/Fields/MarginsRow"]
+[node name="Left" type="SpinBox" parent="Scroll/Fields/MarginsRow" unique_id=1327054214]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "左"
 max_value = 128.0
 value = 18.0
 metadata/style_key = "margins"
 metadata/side = 0
-tooltip_text = "左"
 
-[node name="Top" type="SpinBox" parent="Scroll/Fields/MarginsRow"]
+[node name="Top" type="SpinBox" parent="Scroll/Fields/MarginsRow" unique_id=649182698]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "上"
 max_value = 128.0
 value = 24.0
 metadata/style_key = "margins"
 metadata/side = 1
-tooltip_text = "上"
 
-[node name="Right" type="SpinBox" parent="Scroll/Fields/MarginsRow"]
+[node name="Right" type="SpinBox" parent="Scroll/Fields/MarginsRow" unique_id=1070773069]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "右"
 max_value = 128.0
 value = 18.0
 metadata/style_key = "margins"
 metadata/side = 2
-tooltip_text = "右"
 
-[node name="Bottom" type="SpinBox" parent="Scroll/Fields/MarginsRow"]
+[node name="Bottom" type="SpinBox" parent="Scroll/Fields/MarginsRow" unique_id=2087625317]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "下"
 max_value = 128.0
 value = 14.0
 metadata/style_key = "margins"
 metadata/side = 3
-tooltip_text = "下"
 
-[node name="Decorations" type="CheckBox" parent="Scroll/Fields"]
+[node name="TextureFileDialog" type="FileDialog" parent="." unique_id=654403714]
 unique_name_in_owner = true
-layout_mode = 2
-button_pressed = true
-text = "显示默认蝴蝶结与星星装饰"
-metadata/style_key = "decorations"
-
-[node name="TextureFileDialog" type="FileDialog" parent="."]
-unique_name_in_owner = true
+title = "Open a File"
 size = Vector2i(900, 600)
 file_mode = 0
 access = 2

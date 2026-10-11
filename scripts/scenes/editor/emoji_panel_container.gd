@@ -11,20 +11,23 @@ const EMOJIS : PackedStringArray = [
 ];
 
 func _ready() -> void:
-	var emoji_font : SystemFont = SystemFont.new();
-	emoji_font.font_names = PackedStringArray(["Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji"]);
 	for emoji : String in EMOJIS:
 		var button : Button = Button.new();
 		button.custom_minimum_size = Vector2(44, 44);
 		button.text = emoji;
 		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND;
-		button.add_theme_font_override("font", emoji_font);
 		button.add_theme_font_size_override("font_size", 28);
 		button.pressed.connect(func(): hide(); emoji_selected.emit(emoji));
 		%EmojiGrid.add_child(button);
+	GlobalSettings.settings_changed.connect(_apply_settings);
+	_apply_settings();
+
+func _apply_settings() -> void:
+	for button : Button in %EmojiGrid.get_children():
+		button.add_theme_font_override("font", GlobalSettings.default_emoji_font);
 
 func show_panel() -> void:
-	if visible:
+	if (visible):
 		hide();
 		return;
 	size = Vector2(326, 300);
@@ -34,8 +37,8 @@ func show_panel() -> void:
 	show();
 
 func _input(event : InputEvent) -> void:
-	if not visible or not (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed):
+	if (not visible || not (event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && event.pressed)):
 		return;
 	var point : Vector2 = get_canvas_transform().affine_inverse() * event.position;
-	if not get_global_rect().has_point(point) and not get_parent().get_global_rect().has_point(point):
+	if (not get_global_rect().has_point(point) && not get_parent().get_global_rect().has_point(point)):
 		hide();

@@ -12,7 +12,7 @@ func _ready() -> void:
 	GlobalResourceLoader.history_changed.connect(_history_changed);
 
 func show_gallery() -> void:
-	if visible:
+	if (visible):
 		hide();
 		return;
 	GlobalResourceLoader.load_history();
@@ -25,26 +25,26 @@ func show_gallery() -> void:
 	_change_tab(%Tabs.current_tab);
 
 func _input(event : InputEvent) -> void:
-	if not visible or not (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed):
+	if (not visible || not (event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && event.pressed)):
 		return;
 	var point : Vector2 = get_canvas_transform().affine_inverse() * event.position;
-	if not get_global_rect().has_point(point) and not get_parent().get_global_rect().has_point(point):
+	if (not get_global_rect().has_point(point) && not get_parent().get_global_rect().has_point(point)):
 		hide();
 
 func _change_tab(index : int) -> void:
 	%ImportPage.visible = index == 0;
 	%GalleryPage.visible = index == 1;
 	%DeleteButton.visible = index == 1;
-	if index == 1 and visible:
+	if (index == 1 && visible):
 		_rebuild_gallery();
 
 func _history_changed() -> void:
-	if visible and %Tabs.current_tab == 1:
+	if (visible && %Tabs.current_tab == 1):
 		_rebuild_gallery();
 
 func _toggle_delete(enabled : bool) -> void:
 	for button : Button in %ImageGrid.get_children():
-		button.disabled = not enabled and not button.get_meta("loaded", false);
+		button.disabled = not enabled && not button.get_meta("loaded", false);
 
 func _rebuild_gallery() -> void:
 	_revision += 1;
@@ -64,12 +64,14 @@ func _rebuild_gallery() -> void:
 
 func _load_thumbnail(path : String, button : Button, revision : int) -> void:
 	var texture : ImageTexture = await GlobalResourceLoader.load_image_async(path);
-	if not visible or not is_instance_valid(button) or button.is_queued_for_deletion() or revision != _revision:
+	if (not visible || not is_instance_valid(button) || button.is_queued_for_deletion() || revision != _revision):
 		return;
 	button.set_meta("loaded", texture != null);
-	button.disabled = texture == null and not %DeleteButton.button_pressed;
-	button.text = "无法加载" if texture == null else "";
-	if texture == null:
+	button.disabled = texture == null && not %DeleteButton.button_pressed;
+	button.text = "无法加载" if (texture == null) else "";
+	button.size_flags_vertical = Control.SIZE_EXPAND_FILL;
+	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL;
+	if (texture == null):
 		return;
 	var preview : TextureRect = TextureRect.new();
 	preview.texture = texture;
@@ -84,7 +86,7 @@ func _load_thumbnail(path : String, button : Button, revision : int) -> void:
 	preview.offset_bottom = -5;
 
 func _select_image(path : String) -> void:
-	if %DeleteButton.button_pressed:
+	if (%DeleteButton.button_pressed):
 		GlobalResourceLoader.remove_image(path);
 	else:
 		hide();

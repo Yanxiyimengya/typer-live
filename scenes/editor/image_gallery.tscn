@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://6dtacltx2053"]
 
 [ext_resource type="Script" uid="uid://dnr1qiqg36qpw" path="res://scripts/scenes/editor/image_gallery.gd" id="1_script"]
-[ext_resource type="FontFile" uid="uid://ck7fwtbw1dcjv" path="res://assets/fonts/Default.otf" id="3_font"]
+[ext_resource type="FontFile" uid="uid://ck7fwtbw1dcjv" path="res://assets/fonts/default.otf" id="3_font"]
 
 [sub_resource type="StyleBoxFlat" id="Panel"]
 content_margin_left = 12.0
@@ -35,17 +35,6 @@ content_margin_right = 16.0
 content_margin_bottom = 8.0
 bg_color = Color(0.9647059, 0.96862745, 0.972549, 1)
 
-[sub_resource type="StyleBoxFlat" id="Import"]
-content_margin_left = 18.0
-content_margin_top = 10.0
-content_margin_right = 18.0
-content_margin_bottom = 10.0
-bg_color = Color(0.15686275, 0.5647059, 0.8, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
 [sub_resource type="StyleBoxEmpty" id="DeleteNormal"]
 content_margin_left = 8.0
 content_margin_top = 6.0
@@ -60,8 +49,19 @@ content_margin_bottom = 6.0
 bg_color = Color(0.98, 0.94, 0.94, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
-corner_radius_bottom_left = 5
 corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="Import"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.15686275, 0.5647059, 0.8, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="ImageGallery" type="PanelContainer" unique_id=1202888242]
 top_level = true
@@ -106,11 +106,11 @@ theme_override_colors/font_pressed_color = Color(0.8, 0.23921569, 0.26666668, 1)
 theme_override_colors/font_hover_color = Color(0.8, 0.23921569, 0.26666668, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.8, 0.23921569, 0.26666668, 1)
 theme_override_fonts/font = ExtResource("3_font")
-theme_override_colors/button_checked_color = Color(0.8, 0.23921569, 0.26666668, 1)
 theme_override_styles/normal = SubResource("DeleteNormal")
-theme_override_styles/hover = SubResource("DeleteHover")
 theme_override_styles/pressed = SubResource("DeleteNormal")
+theme_override_styles/hover = SubResource("DeleteHover")
 theme_override_styles/hover_pressed = SubResource("DeleteHover")
+theme_override_colors/button_checked_color = Color(0.8, 0.23921569, 0.26666668, 1)
 text = "删除"
 
 [node name="ImportPage" type="VBoxContainer" parent="Content" unique_id=1875914657]

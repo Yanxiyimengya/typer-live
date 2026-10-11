@@ -6,7 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://bo6k6uruh0wql" path="res://assets/icons/dir/right.svg" id="4_7nw8m"]
 [ext_resource type="Texture2D" uid="uid://depuwrc5pj3bl" path="res://assets/icons/more.svg" id="5_jplfv"]
 [ext_resource type="Texture2D" uid="uid://b7umhuc12us85" path="res://assets/icons/dir/up.svg" id="6_48d4r"]
-[ext_resource type="FontFile" uid="uid://ck7fwtbw1dcjv" path="res://assets/fonts/Default.otf" id="6_t1v10"]
+[ext_resource type="FontFile" uid="uid://ck7fwtbw1dcjv" path="res://assets/fonts/default.otf" id="6_t1v10"]
+[ext_resource type="Texture2D" uid="uid://bb4uis5fudp1a" path="res://assets/icons/slider_grabber.svg" id="7_slider"]
+[ext_resource type="Texture2D" uid="uid://bb2yu02e7h0yw" path="res://assets/icons/slider_grabber_highlight.svg" id="8_slider_hover"]
+[ext_resource type="Texture2D" uid="uid://brfn2lmqsqqw3" path="res://assets/icons/slider_grabber_disabled.svg" id="9_slider_disabled"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b8rj3"]
 
@@ -88,6 +91,33 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxEmpty" id="ScrollFocus"]
 
+[sub_resource type="StyleBoxFlat" id="SliderProgress"]
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.156863, 0.564706, 0.8, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="SliderProgressHighlight"]
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.086275, 0.466667, 0.709804, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="SliderTrack"]
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.88, 0.91, 0.94, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j530m"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tg17e"]
@@ -156,6 +186,13 @@ HScrollBar/styles/grabber_highlight = SubResource("ScrollGrabberHover")
 HScrollBar/styles/grabber_pressed = SubResource("ScrollGrabberPressed")
 HScrollBar/styles/scroll = SubResource("ScrollTrack")
 HScrollBar/styles/scroll_focus = SubResource("ScrollFocus")
+HSlider/icons/grabber = ExtResource("7_slider")
+HSlider/icons/grabber_disabled = ExtResource("9_slider_disabled")
+HSlider/icons/grabber_highlight = ExtResource("8_slider_hover")
+HSlider/styles/focus = SubResource("ScrollFocus")
+HSlider/styles/grabber_area = SubResource("SliderProgress")
+HSlider/styles/grabber_area_highlight = SubResource("SliderProgressHighlight")
+HSlider/styles/slider = SubResource("SliderTrack")
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/font_sizes/font_size = 16
 LineEdit/colors/caret_color = Color(0, 0, 0, 1)

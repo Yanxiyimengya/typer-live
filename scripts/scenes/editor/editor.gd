@@ -140,6 +140,8 @@ func _apply_settings() -> void:
 	text_color_rect.self_modulate = text_color;
 	text_color_picker_view.color_picker.color = text_color;
 	text_size_spinbox.value = GlobalSettings.font_size;
+	text_edit.remove_theme_font_override("font");
+	text_edit.add_theme_font_override("font", GlobalSettings.with_emoji_font(text_edit.get_theme_font("font")));
 
 func _on_send_button() -> void : 
 	var text : String = text_edit.text;
@@ -168,7 +170,7 @@ func _get_text_position(offset : int) -> Vector2i:
 	return Vector2i(lines[-1].length(), lines.size() - 1);
 
 func insert_bbcode_style(bbcode : String, content : String = "") -> void :
-	if not text_edit.has_selection():
+	if (not text_edit.has_selection()):
 		return;
 	var start : int = _get_text_offset(text_edit.get_selection_from_line(), text_edit.get_selection_from_column());
 	var end : int = _get_text_offset(text_edit.get_selection_to_line(), text_edit.get_selection_to_column());
@@ -177,9 +179,9 @@ func insert_bbcode_style(bbcode : String, content : String = "") -> void :
 	var stack : Array[RegExMatch] = [];
 	var pairs : Array[Vector4i] = [];
 	for tag in tags.search_all(text_edit.text):
-		if tag.get_string(1).is_empty():
+		if (tag.get_string(1).is_empty()):
 			stack.append(tag);
-		elif not stack.is_empty():
+		elif (not stack.is_empty()):
 			var opening : RegExMatch = stack.pop_back();
 			pairs.append(Vector4i(opening.get_start(), opening.get_end(), tag.get_start(), tag.get_end()));
 	var formatting : RegEx = RegEx.new();
@@ -188,30 +190,36 @@ func insert_bbcode_style(bbcode : String, content : String = "") -> void :
 	while expanded:
 		expanded = false;
 		for pair in pairs:
-			if pair.y > start or pair.z < end:
+			if (pair.y > start || pair.z < end):
 				continue;
 			var before : String = text_edit.text.substr(pair.y, start - pair.y);
 			var after : String = text_edit.text.substr(end, pair.z - end);
-			if formatting.sub(before, "", true).is_empty() and formatting.sub(after, "", true).is_empty():
+			if (formatting.sub(before, "", true).is_empty() && formatting.sub(after, "", true).is_empty()):
 				start = pair.x;
 				end = pair.w;
 				expanded = true;
 	var selected : String = text_edit.text.substr(start, end - start);
+	var open_tag : String = "[%s]" % bbcode if content.is_empty() else "[%s=%s]" % [bbcode, content];
+	var remove_style : bool = false;
 	var removals : Array[Vector2i] = [];
 	for pair in pairs:
-		if pair.x >= start and pair.w <= end:
+		if (pair.x == start && pair.w == end && text_edit.text.substr(pair.x, pair.y - pair.x) == open_tag):
+			remove_style = true;
+		if (pair.x >= start && pair.w <= end):
 			removals.append(Vector2i(pair.x - start, pair.y - pair.x));
 			removals.append(Vector2i(pair.z - start, pair.w - pair.z));
 	removals.sort_custom(func(a : Vector2i, b : Vector2i) : return a.x > b.x);
 	for removal in removals:
 		selected = selected.erase(removal.x, removal.y);
-	var open_tag : String = "[%s]" % bbcode if content.is_empty() else "[%s=%s]" % [bbcode, content];
+	var replacement : String = selected if remove_style else open_tag + selected + "[/%s]" % bbcode;
+	var selection_start : int = start if remove_style else start + open_tag.length();
 	var from : Vector2i = _get_text_position(start);
 	var to : Vector2i = _get_text_position(end);
 	text_edit.begin_complex_operation();
 	text_edit.select(from.y, from.x, to.y, to.x);
-	text_edit.insert_text_at_caret(open_tag + selected + "[/%s]" % bbcode);
+	text_edit.insert_text_at_caret(replacement);
 	text_edit.end_complex_operation();
-	from = _get_text_position(start + open_tag.length());
-	to = _get_text_position(start + open_tag.length() + selected.length());
+	from = _get_text_position(selection_start);
+	to = _get_text_position(selection_start + selected.length());
 	text_edit.select(from.y, from.x, to.y, to.x);
+	text_edit.grab_focus();

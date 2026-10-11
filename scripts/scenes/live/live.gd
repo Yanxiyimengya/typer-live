@@ -18,9 +18,9 @@ func _ready() -> void:
 	_apply_settings();
 
 func _apply_settings() -> void:
-	if fade_out_time != GlobalSettings.fade_out_time:
+	if (fade_out_time != GlobalSettings.fade_out_time):
 		fade_out_time = GlobalSettings.fade_out_time;
-		if visible and not _fading:
+		if (visible && not _fading):
 			_fade_out_timer = fade_out_time;
 
 func _process(delta: float) -> void:

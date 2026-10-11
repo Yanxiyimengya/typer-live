@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://d1elvi8w0sk06" path="res://assets/styles/editor/editor.tres" id="1_b8rj3"]
 [ext_resource type="Script" uid="uid://dmes7emg8ji7p" path="res://scripts/scenes/editor/editor.gd" id="1_bc6i7"]
 [ext_resource type="Texture2D" uid="uid://dpfjkgbv1boak" path="res://assets/icons/b.svg" id="2_5cfe8"]
-[ext_resource type="FontFile" uid="uid://ck7fwtbw1dcjv" path="res://assets/fonts/Default.otf" id="2_m0is4"]
+[ext_resource type="FontFile" uid="uid://ck7fwtbw1dcjv" path="res://assets/fonts/default.otf" id="2_m0is4"]
 [ext_resource type="PackedScene" uid="uid://bjv0xvguuersf" path="res://scenes/editor/editor_tool_button.tscn" id="2_pq70c"]
 [ext_resource type="Texture2D" uid="uid://dltko8ewb1xck" path="res://assets/icons/i.svg" id="3_7gtdv"]
 [ext_resource type="Texture2D" uid="uid://5a7igsdnc2c2" path="res://assets/icons/u.svg" id="4_jwsr6"]
@@ -312,7 +312,10 @@ scroll_fit_content_width = true
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=895822468]
 layout_mode = 2
 
-[node name="SettingButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1800607165]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=143036381]
+layout_mode = 2
+
+[node name="SettingButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1800607165]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
@@ -332,7 +335,11 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_hx1gb")
 text = "设置"
 icon = ExtResource("22_r6jol")
 
-[node name="ResetButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=32760446]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=2112455922]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="ResetButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2" unique_id=32760446]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
@@ -352,7 +359,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_f0t63")
 text = "清空"
 icon = ExtResource("13_pq70c")
 
-[node name="SendButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=2015424441]
+[node name="SendButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2" unique_id=2015424441]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2

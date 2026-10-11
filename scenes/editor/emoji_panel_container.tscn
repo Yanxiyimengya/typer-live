@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cgj8k3i3lnurp"]
 
 [ext_resource type="Script" uid="uid://clqd3nq8dxhkp" path="res://scripts/scenes/editor/emoji_panel_container.gd" id="1_script"]
-[ext_resource type="FontFile" uid="uid://ck7fwtbw1dcjv" path="res://assets/fonts/Default.otf" id="2_font"]
+[ext_resource type="FontFile" uid="uid://ck7fwtbw1dcjv" path="res://assets/fonts/default.otf" id="2_font"]
 
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oljq2"]
