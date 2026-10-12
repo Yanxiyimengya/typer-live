@@ -101,35 +101,40 @@ tab_0/title = "常规设置"
 tab_1/title = "字体设置"
 tab_2/title = "气泡设置"
 
-[node name="GeneralSettings" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer" unique_id=1536728162]
+[node name="GeneralSettings" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer" unique_id=1536728162]
 layout_mode = 2
+horizontal_scroll_mode = 0
+metadata/_tab_name = "常规设置"
+metadata/_tab_index = 0
+
+[node name="FieldsMargin" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings" unique_id=142960303]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
-metadata/_tab_name = "常规设置"
-metadata/_tab_index = 0
 
-[node name="Fields" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings" unique_id=1164273812]
+[node name="Fields" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin" unique_id=1164273812]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="SenderRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields" unique_id=1771051659]
+[node name="SenderRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields" unique_id=1771051659]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="SenderLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/SenderRow" unique_id=1774239180]
+[node name="SenderLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/SenderRow" unique_id=1774239180]
 layout_mode = 2
 text = "说话人"
 
-[node name="SenderNameEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/SenderRow" unique_id=1681793627]
+[node name="SenderNameEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/SenderRow" unique_id=1681793627]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "忆梦"
 placeholder_text = "说话人名称"
 
-[node name="SenderResetButton" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/SenderRow" unique_id=361897680 instance=ExtResource("4_tool_button")]
+[node name="SenderResetButton" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/SenderRow" unique_id=361897680 instance=ExtResource("4_tool_button")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
@@ -137,15 +142,15 @@ tooltip_text = "还原默认说话人"
 theme_override_constants/icon_max_width = 20
 icon = ExtResource("3_reset")
 
-[node name="VoiceVolumeRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields" unique_id=497084264]
+[node name="VoiceVolumeRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields" unique_id=497084264]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/VoiceVolumeRow" unique_id=2007502606]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/VoiceVolumeRow" unique_id=2007502606]
 layout_mode = 2
 text = "音效音量"
 
-[node name="VoiceVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/VoiceVolumeRow" unique_id=73046637]
+[node name="VoiceVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/VoiceVolumeRow" unique_id=73046637]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 32)
 layout_mode = 2
@@ -153,34 +158,34 @@ size_flags_horizontal = 0
 size_flags_vertical = 4
 value = 100.0
 
-[node name="VoiceVolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/VoiceVolumeRow" unique_id=1865914525]
+[node name="VoiceVolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/VoiceVolumeRow" unique_id=1865914525]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 text = "100%"
 horizontal_alignment = 2
 
-[node name="VoiceLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields" unique_id=838310023]
+[node name="VoiceLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields" unique_id=838310023]
 layout_mode = 2
 text = "默认音效路径"
 
-[node name="VoiceRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields" unique_id=1057046892]
+[node name="VoiceRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields" unique_id=1057046892]
 layout_mode = 2
 
-[node name="VoicePathEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/VoiceRow" unique_id=1974715300]
+[node name="VoicePathEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/VoiceRow" unique_id=1974715300]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "音效文件路径"
 
-[node name="VoiceBrowseButton" type="Button" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/VoiceRow" unique_id=1375997177]
+[node name="VoiceBrowseButton" type="Button" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/VoiceRow" unique_id=1375997177]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "浏览…"
 
-[node name="VoiceResetButton" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/VoiceRow" unique_id=346543333 instance=ExtResource("4_tool_button")]
+[node name="VoiceResetButton" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/VoiceRow" unique_id=346543333 instance=ExtResource("4_tool_button")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
@@ -188,28 +193,28 @@ tooltip_text = "还原默认音效"
 theme_override_constants/icon_max_width = 20
 icon = ExtResource("3_reset")
 
-[node name="EmojiFontLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields"]
+[node name="EmojiFontLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields" unique_id=482565756]
 layout_mode = 2
 text = "Emoji 字体"
 
-[node name="EmojiFontRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields"]
+[node name="EmojiFontRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields" unique_id=1207677289]
 layout_mode = 2
 
-[node name="EmojiFontPathEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/EmojiFontRow"]
+[node name="EmojiFontPathEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/EmojiFontRow" unique_id=86458151]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "留空使用内置 Emoji 字体"
 tooltip_text = "留空时使用 res://assets/fonts/emoji.ttf"
+placeholder_text = "留空使用内置 Emoji 字体"
 
-[node name="EmojiFontBrowseButton" type="Button" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/EmojiFontRow"]
+[node name="EmojiFontBrowseButton" type="Button" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/EmojiFontRow" unique_id=509166311]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "浏览…"
 
-[node name="EmojiFontResetButton" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/EmojiFontRow" instance=ExtResource("4_tool_button")]
+[node name="EmojiFontResetButton" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/EmojiFontRow" unique_id=1735254222 instance=ExtResource("4_tool_button")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
@@ -217,15 +222,15 @@ tooltip_text = "还原默认 Emoji 字体（留空）"
 theme_override_constants/icon_max_width = 20
 icon = ExtResource("3_reset")
 
-[node name="FadeOutRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields" unique_id=985614771]
+[node name="FadeOutRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields" unique_id=985614771]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="FadeOutLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/FadeOutRow" unique_id=1067570220]
+[node name="FadeOutLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/FadeOutRow" unique_id=1067570220]
 layout_mode = 2
 text = "打完字停留的时长 / 秒"
 
-[node name="FadeOutTimeSpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/FadeOutRow" unique_id=409018808]
+[node name="FadeOutTimeSpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/FadeOutRow" unique_id=409018808]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 32)
 layout_mode = 2
@@ -234,13 +239,89 @@ step = 0.1
 value = 2.0
 allow_greater = true
 
-[node name="FadeOutResetButton" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/Fields/FadeOutRow" unique_id=1936208759 instance=ExtResource("4_tool_button")]
+[node name="FadeOutResetButton" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/FadeOutRow" unique_id=1936208759 instance=ExtResource("4_tool_button")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "还原默认停留时长（2 秒）"
 theme_override_constants/icon_max_width = 20
 icon = ExtResource("3_reset")
+
+[node name="TTSSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields" unique_id=562723244]
+layout_mode = 2
+
+[node name="TTSEnabled" type="CheckButton" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields" unique_id=13216153]
+unique_name_in_owner = true
+layout_mode = 2
+text = "文字转语音 · 发送后自动朗读"
+
+[node name="TTSVoiceRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields" unique_id=142916679]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/TTSVoiceRow" unique_id=1157011272]
+layout_mode = 2
+text = "朗读音色"
+
+[node name="TTSVoiceOption" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/TTSVoiceRow" unique_id=1071299521]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+clip_text = true
+
+[node name="TTSOptionsRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields" unique_id=1486637098]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="VolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/TTSOptionsRow" unique_id=1054017942]
+layout_mode = 2
+text = "朗读音量"
+
+[node name="TTSVolume" type="SpinBox" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/TTSOptionsRow" unique_id=1505216973]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+value = 100.0
+suffix = "%"
+
+[node name="RateLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/TTSOptionsRow" unique_id=1447577721]
+layout_mode = 2
+text = "语速"
+
+[node name="TTSRate" type="SpinBox" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/TTSOptionsRow" unique_id=1864824888]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+min_value = 0.5
+max_value = 2.0
+step = 0.1
+value = 1.0
+suffix = "×"
+
+[node name="TTSPreviewRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields" unique_id=1615324631]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TTSTestButton" type="Button" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/TTSPreviewRow" unique_id=1441328082]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 32)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "试听"
+
+[node name="TTSStopButton" type="Button" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields/TTSPreviewRow" unique_id=1906083875]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 32)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "停止朗读"
+
+[node name="TTSUnavailableHint" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GeneralSettings/FieldsMargin/Fields" unique_id=222523981]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42, 0.47, 0.53, 1)
+text = "当前没有可用的系统语音，请安装语音包后重新打开设置。"
+autowrap_mode = 3
 
 [node name="FontSettings" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer" unique_id=2121824595]
 visible = false

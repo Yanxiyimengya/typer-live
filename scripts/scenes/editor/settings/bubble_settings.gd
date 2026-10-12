@@ -1,10 +1,10 @@
 extends TabContainer;
 
-@onready var body_editor : VBoxContainer = $Styles/StyleTabs/BodyEditor;
-@onready var sender_editor : VBoxContainer = $Styles/StyleTabs/SenderEditor;
-@onready var preview : DialogBubble = $Styles/PreviewColumn/Frame/AspectRatioContainer/SubViewportContainer/SubViewport/DialogBubble;
+@onready var body_editor : VBoxContainer = %BodyEditor;
+@onready var sender_editor : VBoxContainer = %SenderEditor;
+@onready var preview : DialogBubble = %DialogBubble;
 
-@onready var decoration_editor : Container = $Decorations;
+@onready var decoration_editor : Container = %Decorations;
 
 func _ready() -> void:
 	preview.set_process(false);

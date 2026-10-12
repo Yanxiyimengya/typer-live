@@ -331,6 +331,7 @@ focus_mode = 2
 script = ExtResource("2_canvas")
 
 [node name="ViewportContainer" type="SubViewportContainer" parent="Workspace/DecorationCanvas" unique_id=2005644648]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 44.0
 offset_top = 168.75
@@ -347,11 +348,13 @@ size = Vector2i(800, 300)
 render_target_update_mode = 4
 
 [node name="DialogBubble" parent="Workspace/DecorationCanvas/ViewportContainer/SubViewport" unique_id=1811924615 instance=ExtResource("4_bubble")]
+unique_name_in_owner = true
 
 [node name="DialogTextLabel" parent="Workspace/DecorationCanvas/ViewportContainer/SubViewport/DialogBubble/VBoxContainer/PanelContainer/VBoxContainer" parent_id_path=PackedInt32Array(1811924615, 1871255080) index="0" unique_id=1826978105]
 text = "把喜欢的图片，装饰在你的气泡上。"
 
 [node name="Overlay" type="Control" parent="Workspace/DecorationCanvas" unique_id=95944296]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

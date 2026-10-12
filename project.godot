@@ -17,6 +17,11 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 boot_splash/stretch_mode=0
 boot_splash/use_filter=false
+config/icon="uid://c2nr1igwdwqss"
+
+[audio]
+
+general/text_to_speech=true
 
 [autoload]
 
@@ -24,6 +29,7 @@ GlobalWindowManager="*uid://dga3rrfg7u81v"
 GlobalSoundManager="*uid://byp82xo4uqxk5"
 GlobalSettings="*res://scripts/autoloads/global_settings/global_settings.gd"
 GlobalResourceLoader="*res://scripts/autoloads/global_resource_loader/global_resource_loader.gd"
+GlobalTTS="*res://scripts/autoloads/global_tts/global_tts.gd"
 
 [display]
 
@@ -39,6 +45,10 @@ folder_colors={
 "res://scripts/": "teal"
 }
 
+[gui]
+
+theme/custom_font="uid://ck7fwtbw1dcjv"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
@@ -46,8 +56,10 @@ folder_colors={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+gl_compatibility/nvidia_disable_threaded_optimization=false
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 anti_aliasing/screen_space_roughness_limiter/enabled=false
 environment/screen_space_reflection/half_size=false
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 rendering_device/vsync/vsync_mode=1

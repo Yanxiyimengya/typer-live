@@ -99,6 +99,7 @@ layout_mode = 2
 theme_override_constants/separation = -12
 
 [node name="SenderPanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=1297553357]
+unique_name_in_owner = true
 z_index = 1
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
@@ -120,6 +121,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=428902698]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("DialogueCard")

@@ -7,30 +7,36 @@ var text_color : Color = Color.RED;
 var text_bg_color : Color = Color.GRAY;
 var text_size : float = 24;
 
-var text_edit : TextEdit = null;
-var send_button : BaseButton = null;
-var reset_button : BaseButton = null;
-
-var text_bold_button : BaseButton = null;
-var text_italic_button : BaseButton = null;
-var text_underline_button : BaseButton = null;
-var text_delete_button : BaseButton = null;
-
-var text_color_button : BaseButton = null;
-var text_color_rect : TextureRect = null;
-var text_color_picker_view : Control = null;
-var text_bg_color_button : BaseButton = null;
-var text_bg_color_rect : TextureRect = null;
-var text_bg_color_picker_view : Control = null;
-
-var text_size_button : BaseButton = null;
-var text_size_spinbox : SpinBox = null;
+@onready var text_edit : TextEdit = %TextEdit;
+@onready var send_button : BaseButton = %SendButton;
+@onready var reset_button : BaseButton = %ResetButton;
+@onready var text_bold_button : BaseButton = %TextBoldButton;
+@onready var text_italic_button : BaseButton = %TextItalicButton;
+@onready var text_underline_button : BaseButton = %TextUnderlineButton;
+@onready var text_delete_button : BaseButton = %TextDeleteButton;
+@onready var text_color_button : BaseButton = %TextColorButton;
+@onready var text_color_rect : TextureRect = %TextColorTextureRect;
+@onready var text_color_picker_view : Control = %TextColorPickerView;
+@onready var text_bg_color_button : BaseButton = %TextBgColorButton;
+@onready var text_bg_color_rect : TextureRect = %TextBgColorTextureRect;
+@onready var text_bg_color_picker_view : Control = %TextBgColorPickerView;
+@onready var text_size_button : BaseButton = %TextSizeButton;
+@onready var text_size_spinbox : SpinBox = %TextSizeSpinBox;
 var image_file_dialog : FileDialog = null;
 
 var settings_window : DefaultWindow = null;
 var settings_scene : Control = null;
+var _applied_emoji_font : Font;
 
 const SETTINGS : PackedScene = preload("uid://dfu5lwhq2wcda");
+
+@onready var gallery : Control = %ImageGallery;
+@onready var emoji_panel : Control = %EmojiPanelContainer;
+@onready var setting_button : Button = %SettingButton;
+@onready var text_color_dropdown_button : Button = %TextColorDropdownButton;
+@onready var text_bg_color_dropdown_button : Button = %TextBgColorDropdownButton;
+@onready var image_button : Button = %ImageButton;
+@onready var emoji_button : Button = %EmojiButton;
 
 func _ready() -> void:
 	var wid : int = GlobalWindowManager.new_window();
@@ -54,58 +60,41 @@ func _ready() -> void:
 		settings_window.add_child(settings_scene);
 		await settings_scene.ready;
 		settings_scene.confirmed.connect(settings_window.hide);
-		get_node("%SettingButton").pressed.connect(_show_settings);
+		setting_button.pressed.connect(_show_settings);
 	
-	text_edit = self.get_node("%TextEdit");
-	send_button = self.get_node("%SendButton");
-	reset_button = self.get_node("%ResetButton");
 	send_button.pressed.connect(_on_send_button);
 	reset_button.pressed.connect(_on_reset_button)
 	
-	text_bold_button = self.get_node("%TextBoldButton");
-	text_italic_button = self.get_node("%TextItalicButton");
-	text_underline_button = self.get_node("%TextUnderlineButton");
-	text_delete_button = self.get_node("%TextDeleteButton");
-	
 	# 文字颜色选择
-	text_color_button = self.get_node("%TextColorButton");
-	text_color_rect = self.get_node("%TextColorTextureRect");
 	text_color_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE;
 	text_color_rect.self_modulate = text_color;
-	text_color_picker_view = self.get_node("%TextColorPickerView");
 	text_color_picker_view.color_picker.color = text_color;
 	text_color_picker_view.changer_func = func(col : Color) :
 		if (text_color != col) : 
 			text_color = col;
 			text_color_rect.self_modulate = col;
 	# 背景颜色选择
-	text_bg_color_button = self.get_node("%TextBgColorButton");
-	text_bg_color_rect = self.get_node("%TextBgColorTextureRect");
 	text_bg_color_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE;
 	text_bg_color_rect.modulate = Color.WHITE;
 	text_bg_color_rect.self_modulate = text_bg_color;
-	text_bg_color_picker_view = self.get_node("%TextBgColorPickerView");
 	text_bg_color_picker_view.color_picker.color = text_bg_color;
 	text_bg_color_picker_view.changer_func = func(col : Color) :
 		if (text_bg_color != col) : 
 			text_bg_color = col;
 			text_bg_color_rect.self_modulate = col;
 	
-	text_size_spinbox = self.get_node("%TextSizeSpinBox");
 	text_size_spinbox.value_changed.connect(func(value : float):
 		text_size = value;
 		);
 	text_size_spinbox.value = text_size;
-	text_size_button = self.get_node("%TextSizeButton");
-	
 	text_bold_button.pressed.connect(insert_bbcode_style.bind("b"));
 	text_italic_button.pressed.connect(insert_bbcode_style.bind("i"));
 	text_underline_button.pressed.connect(insert_bbcode_style.bind("u"));
 	text_delete_button.pressed.connect(insert_bbcode_style.bind("s"));
 	text_color_button.pressed.connect(func() : insert_bbcode_style("color", "#" + text_color.to_html()));
 	text_bg_color_button.pressed.connect(func() : insert_bbcode_style("bgcolor", "#" + text_bg_color.to_html()));
-	get_node("%TextColorDropdownButton").pressed.connect(text_color_picker_view.show_picker);
-	get_node("%TextBgColorDropdownButton").pressed.connect(text_bg_color_picker_view.show_picker);
+	text_color_dropdown_button.pressed.connect(text_color_picker_view.show_picker);
+	text_bg_color_dropdown_button.pressed.connect(text_bg_color_picker_view.show_picker);
 	text_size_button.pressed.connect(func() : insert_bbcode_style("font_size", str(text_size)));
 	
 	image_file_dialog = FileDialog.new();
@@ -117,19 +106,17 @@ func _ready() -> void:
 	image_file_dialog.filters = PackedStringArray(["*.png,*.jpg,*.jpeg,*.webp,*.bmp,*.svg;图片"]);
 	add_child(image_file_dialog);
 	image_file_dialog.file_selected.connect(insert_image);
-	var gallery : Control = get_node("%ImageGallery");
-	get_node("%ImageButton").pressed.connect(gallery.show_gallery);
+	image_button.pressed.connect(gallery.show_gallery);
 	gallery.import_requested.connect(image_file_dialog.popup_centered.bind(Vector2i(900, 600)));
 	gallery.image_selected.connect(insert_image);
-	var emoji_panel : Control = get_node("%EmojiButton/EmojiPanelContainer");
-	get_node("%EmojiButton").pressed.connect(emoji_panel.show_panel);
+	emoji_button.pressed.connect(emoji_panel.show_panel);
 	emoji_panel.emoji_selected.connect(insert_emoji);
 	GlobalSettings.settings_changed.connect(_apply_settings);
 	_apply_settings();
 
 func _show_settings() -> void:
-	get_node("%ImageGallery").hide();
-	get_node("%EmojiButton/EmojiPanelContainer").hide();
+	gallery.hide();
+	emoji_panel.hide();
 	text_color_picker_view.hide();
 	text_bg_color_picker_view.hide();
 	settings_scene.refresh();
@@ -140,8 +127,10 @@ func _apply_settings() -> void:
 	text_color_rect.self_modulate = text_color;
 	text_color_picker_view.color_picker.color = text_color;
 	text_size_spinbox.value = GlobalSettings.font_size;
-	text_edit.remove_theme_font_override("font");
-	text_edit.add_theme_font_override("font", GlobalSettings.with_emoji_font(text_edit.get_theme_font("font")));
+	if (_applied_emoji_font != GlobalSettings.default_emoji_font):
+		_applied_emoji_font = GlobalSettings.default_emoji_font;
+		text_edit.remove_theme_font_override("font");
+		text_edit.add_theme_font_override("font", GlobalSettings.with_emoji_font(text_edit.get_theme_font("font")));
 
 func _on_send_button() -> void : 
 	var text : String = text_edit.text;

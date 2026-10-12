@@ -1,16 +1,17 @@
 extends Node;
 
 const LIVE : PackedScene = preload("uid://vfy15iuwkbvj");
+const SPEECH_TEXT = preload("res://scripts/core/bbcode_speech_text.gd");
 
 var live_dialog_window : DefaultWindow = null;
 var live_scene : Control = null;
-var editor : Editor = null;
+@onready var editor : Editor = %Editor;
 var _last_live_rect : Rect2i;
 var _save_live_timer : float = -1.0;
 var _live_window_ready : bool = false;
 
 func _ready() -> void:
-	editor = self.get_node("%Editor");
+	GlobalSettings.settings_changed.connect(_apply_speech_settings);
 	editor.send_text.connect(_on_editor_send_text);
 	
 	var wid : int = GlobalWindowManager.new_window();
@@ -51,7 +52,14 @@ func _exit_tree() -> void:
 	if (_live_window_ready && is_instance_valid(live_dialog_window)):
 		GlobalSettings.save_live_window(live_dialog_window.size, live_dialog_window.position);
 
+func _apply_speech_settings() -> void:
+	if (not GlobalSettings.tts_settings.enabled):
+		GlobalTTS.stop();
+
 func _on_editor_send_text(text : String) -> void : 
+	if (GlobalSettings.tts_settings.enabled):
+		var speech : Dictionary = GlobalSettings.tts_settings;
+		GlobalTTS.speak(SPEECH_TEXT.plain_text(text), GlobalTTS.select_voice(speech.voice, "zh"), speech.volume, speech.rate);
 	live_scene.print_text(GlobalSettings.sender_name, text);
 	live_scene.size_flags_vertical = Control.SIZE_EXPAND_FILL;
 	live_scene.size_flags_horizontal = Control.SIZE_EXPAND_FILL;

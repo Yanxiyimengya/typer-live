@@ -10,32 +10,53 @@ var selected_index : int = -1;
 var _loading : bool = false;
 @onready var canvas : Control = %DecorationCanvas;
 
+@onready var import_decoration_dialog : FileDialog = %ImportDecorationDialog;
+@onready var decoration_import_error : AcceptDialog = %DecorationImportError;
+@onready var anchor_option : OptionButton = %AnchorOption;
+@onready var add_decoration_button : Button = %AddDecorationButton;
+@onready var remove_decoration_button : Button = %RemoveDecorationButton;
+@onready var clear_decorations_button : Button = %ClearDecorationsButton;
+@onready var decoration_nodes : Tree = %DecorationNodes;
+@onready var decoration_layer : SpinBox = %DecorationLayer;
+@onready var move_tool : Button = %MoveTool;
+@onready var scale_tool : Button = %ScaleTool;
+@onready var rotate_tool : Button = %RotateTool;
+@onready var decoration_name_edit : LineEdit = %DecorationNameEdit;
+@onready var decoration_visible : CheckBox = %DecorationVisible;
+@onready var position_x : SpinBox = %PositionX;
+@onready var position_y : SpinBox = %PositionY;
+@onready var scale_x : SpinBox = %ScaleX;
+@onready var scale_y : SpinBox = %ScaleY;
+@onready var decoration_rotation : SpinBox = %DecorationRotation;
+@onready var inspector_scroll : ScrollContainer = %InspectorScroll;
+@onready var snap_to_grid : CheckButton = %SnapToGrid;
+
 func _ready() -> void:
 	add_to_group("decoration_image_editors");
 	canvas.preview.set_process(false);
-	%ImportDecorationDialog.theme = get_window().theme;
-	%DecorationImportError.theme = APPLE_THEME;
-	%AnchorOption.get_popup().theme = get_window().theme;
-	%AddDecorationButton.pressed.connect(%ImportDecorationDialog.popup_centered.bind(Vector2i(900, 600)));
-	%ImportDecorationDialog.file_selected.connect(add_image);
-	%RemoveDecorationButton.pressed.connect(_remove_selected);
-	%ClearDecorationsButton.pressed.connect(func(): set_data([]); decorations_changed.emit());
-	%DecorationNodes.item_selected.connect(_select_node);
-	%DecorationNodes.order_requested.connect(_reorder);
-	%DecorationNodes.set_column_expand(1, false);
-	%DecorationNodes.set_column_custom_minimum_width(1, 44);
-	%DecorationNodes.set_column_title(0, "节点");
-	%DecorationNodes.set_column_title(1, "层级");
-	%DecorationLayer.value_changed.connect(_layer_changed);
+	import_decoration_dialog.theme = get_window().theme;
+	decoration_import_error.theme = APPLE_THEME;
+	anchor_option.get_popup().theme = get_window().theme;
+	add_decoration_button.pressed.connect(import_decoration_dialog.popup_centered.bind(Vector2i(900, 600)));
+	import_decoration_dialog.file_selected.connect(add_image);
+	remove_decoration_button.pressed.connect(_remove_selected);
+	clear_decorations_button.pressed.connect(func(): set_data([]); decorations_changed.emit());
+	decoration_nodes.item_selected.connect(_select_node);
+	decoration_nodes.order_requested.connect(_reorder);
+	decoration_nodes.set_column_expand(1, false);
+	decoration_nodes.set_column_custom_minimum_width(1, 44);
+	decoration_nodes.set_column_title(0, "节点");
+	decoration_nodes.set_column_title(1, "层级");
+	decoration_layer.value_changed.connect(_layer_changed);
 	canvas.selection_changed.connect(_select);
 	canvas.transform_changed.connect(_transform_changed);
-	%MoveTool.pressed.connect(func(): canvas.mode = "move");
-	%ScaleTool.pressed.connect(func(): canvas.mode = "scale");
-	%RotateTool.pressed.connect(func(): canvas.mode = "rotate");
-	%AnchorOption.item_selected.connect(_align);
-	%DecorationNameEdit.text_changed.connect(func(value : String): _set_property("name", value));
-	%DecorationVisible.toggled.connect(func(value : bool): _set_property("visible", value));
-	for control : SpinBox in [%PositionX, %PositionY, %ScaleX, %ScaleY, %DecorationRotation]:
+	move_tool.pressed.connect(func(): canvas.mode = "move");
+	scale_tool.pressed.connect(func(): canvas.mode = "scale");
+	rotate_tool.pressed.connect(func(): canvas.mode = "rotate");
+	anchor_option.item_selected.connect(_align);
+	decoration_name_edit.text_changed.connect(func(value : String): _set_property("name", value));
+	decoration_visible.toggled.connect(func(value : bool): _set_property("visible", value));
+	for control : SpinBox in [position_x, position_y, scale_x, scale_y, decoration_rotation]:
 		control.value_changed.connect(_inspector_changed);
 	set_data(GlobalSettings.decoration_items);
 
@@ -73,14 +94,14 @@ func set_styles(body : Dictionary, sender : Dictionary) -> void:
 func add_image(path : String) -> void:
 	var stored_path : String = DECORATION_IMAGES.import_image(path);
 	if (stored_path.is_empty()):
-		%DecorationImportError.dialog_text = "无法复制图片到本地存储，请检查图片文件及存储目录的访问权限。";
-		%DecorationImportError.popup_centered();
+		decoration_import_error.dialog_text = "无法复制图片到本地存储，请检查图片文件及存储目录的访问权限。";
+		decoration_import_error.popup_centered();
 		return;
 	var texture : Texture2D = GlobalResourceLoader.load_image(stored_path);
 	if (texture == null):
 		GlobalSettings.cleanup_decoration_images();
-		%DecorationImportError.dialog_text = "无法读取图片，文件可能不完整或格式不受支持。\n" + path.get_file();
-		%DecorationImportError.popup_centered();
+		decoration_import_error.dialog_text = "无法读取图片，文件可能不完整或格式不受支持。\n" + path.get_file();
+		decoration_import_error.popup_centered();
 		return;
 	var dimensions : Vector2 = texture.get_size();
 	dimensions *= minf(1.0, 160.0 / maxf(dimensions.x, dimensions.y));
@@ -90,10 +111,10 @@ func add_image(path : String) -> void:
 	_changed();
 
 func _rebuild_nodes() -> void:
-	%DecorationNodes.clear();
-	var root : TreeItem = %DecorationNodes.create_item();
+	decoration_nodes.clear();
+	var root : TreeItem = decoration_nodes.create_item();
 	for index in range(items.size() - 1, -1, -1):
-		var node : TreeItem = %DecorationNodes.create_item(root);
+		var node : TreeItem = decoration_nodes.create_item(root);
 		node.set_text(0, items[index].name);
 		node.set_text(1, str(index + 1));
 		node.set_metadata(0, index);
@@ -101,38 +122,38 @@ func _rebuild_nodes() -> void:
 		node.set_tooltip_text(0, "拖拽调整层级，越靠上越靠前");
 
 func _select_node() -> void:
-	var node : TreeItem = %DecorationNodes.get_selected();
+	var node : TreeItem = decoration_nodes.get_selected();
 	_select(int(node.get_metadata(0)) if node != null else -1);
 
 func _select(index : int) -> void:
 	selected_index = index;
-	%DecorationNodes.set_block_signals(true);
-	%DecorationNodes.deselect_all();
+	decoration_nodes.set_block_signals(true);
+	decoration_nodes.deselect_all();
 	if (index >= 0 && index < items.size()):
-		var node : TreeItem = %DecorationNodes.get_root().get_child(items.size() - 1 - index);
+		var node : TreeItem = decoration_nodes.get_root().get_child(items.size() - 1 - index);
 		node.select(0);
-		%DecorationNodes.scroll_to_item(node);
-	%DecorationNodes.set_block_signals(false);
+		decoration_nodes.scroll_to_item(node);
+	decoration_nodes.set_block_signals(false);
 	canvas.select(index);
 	_refresh_inspector();
 
 func _refresh_inspector() -> void:
 	_loading = true;
-	%InspectorScroll.visible = selected_index >= 0;
-	%RemoveDecorationButton.disabled = selected_index < 0;
-	%AnchorOption.disabled = selected_index < 0;
+	inspector_scroll.visible = selected_index >= 0;
+	remove_decoration_button.disabled = selected_index < 0;
+	anchor_option.disabled = selected_index < 0;
 	if (selected_index >= 0):
 		var data : Dictionary = items[selected_index];
-		%DecorationNameEdit.text = data.name;
-		%DecorationVisible.set_pressed_no_signal(data.visible);
-		%DecorationLayer.max_value = items.size();
-		%DecorationLayer.set_value_no_signal(selected_index + 1);
-		%PositionX.set_value_no_signal(data.position.x);
-		%PositionY.set_value_no_signal(data.position.y);
-		%ScaleX.set_value_no_signal(data.scale.x);
-		%ScaleY.set_value_no_signal(data.scale.y);
-		%DecorationRotation.set_value_no_signal(data.rotation);
-		%AnchorOption.select(ANCHORS.find(data.anchor));
+		decoration_name_edit.text = data.name;
+		decoration_visible.set_pressed_no_signal(data.visible);
+		decoration_layer.max_value = items.size();
+		decoration_layer.set_value_no_signal(selected_index + 1);
+		position_x.set_value_no_signal(data.position.x);
+		position_y.set_value_no_signal(data.position.y);
+		scale_x.set_value_no_signal(data.scale.x);
+		scale_y.set_value_no_signal(data.scale.y);
+		decoration_rotation.set_value_no_signal(data.rotation);
+		anchor_option.select(ANCHORS.find(data.anchor));
 	_loading = false;
 
 func _set_property(key : String, value : Variant) -> void:
@@ -140,7 +161,7 @@ func _set_property(key : String, value : Variant) -> void:
 		return;
 	items[selected_index][key] = value;
 	if (key == "name"):
-		%DecorationNodes.get_root().get_child(items.size() - 1 - selected_index).set_text(0, value);
+		decoration_nodes.get_root().get_child(items.size() - 1 - selected_index).set_text(0, value);
 	_changed();
 
 func _layer_changed(value : float) -> void:
@@ -168,13 +189,13 @@ func _reorder(from_index : int, to_index : int) -> void:
 func _inspector_changed(_value : float) -> void:
 	if (_loading || selected_index < 0):
 		return;
-	items[selected_index].position = Vector2(%PositionX.value, %PositionY.value);
-	items[selected_index].scale = Vector2(%ScaleX.value, %ScaleY.value);
-	items[selected_index].rotation = %DecorationRotation.value;
+	items[selected_index].position = Vector2(position_x.value, position_y.value);
+	items[selected_index].scale = Vector2(scale_x.value, scale_y.value);
+	items[selected_index].rotation = decoration_rotation.value;
 	_changed();
 
 func _transform_changed(index : int, data : Dictionary) -> void:
-	if (%SnapToGrid.button_pressed && data.position != items[index].position):
+	if (snap_to_grid.button_pressed && data.position != items[index].position):
 		data.position = data.position.snapped(Vector2(10, 10));
 	items[index] = data;
 	_refresh_inspector();

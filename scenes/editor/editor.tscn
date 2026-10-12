@@ -148,7 +148,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_bhunq")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ToolBar" unique_id=894358239]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 12
 
 [node name="TextBoldButton" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer" unique_id=150235111 instance=ExtResource("2_pq70c")]
 unique_name_in_owner = true
@@ -253,6 +253,7 @@ layout_mode = 2
 icon = ExtResource("8_p4u40")
 
 [node name="EmojiPanelContainer" parent="PanelContainer/VBoxContainer/ToolBar/HBoxContainer/EmojiButton" unique_id=1059541183 instance=ExtResource("14_ja8tm")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 0
 
@@ -289,7 +290,15 @@ theme_override_icons/down_hover = ExtResource("16_dropdown")
 theme_override_icons/down_pressed = ExtResource("16_dropdown")
 theme_override_icons/down_disabled = ExtResource("16_dropdown")
 
-[node name="TextEdit" type="TextEdit" parent="PanelContainer/VBoxContainer" unique_id=2063646449]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=1925102562]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextEdit" type="TextEdit" parent="PanelContainer/VBoxContainer/MarginContainer" unique_id=2063646449]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3

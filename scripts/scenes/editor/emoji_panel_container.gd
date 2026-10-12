@@ -1,6 +1,7 @@
 extends PanelContainer;
 
 signal emoji_selected(emoji : String);
+var _applied_font : Font;
 
 const EMOJIS : PackedStringArray = [
 	"😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣", "😊", "🙂", "😉", "😍",
@@ -10,6 +11,8 @@ const EMOJIS : PackedStringArray = [
 	"🐱", "🐶", "🐼", "🍎", "🍰", "☕", "🎵", "💡", "✅", "❌", "💯", "🚀"
 ];
 
+@onready var emoji_grid : GridContainer = %EmojiGrid;
+
 func _ready() -> void:
 	for emoji : String in EMOJIS:
 		var button : Button = Button.new();
@@ -18,12 +21,15 @@ func _ready() -> void:
 		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND;
 		button.add_theme_font_size_override("font_size", 28);
 		button.pressed.connect(func(): hide(); emoji_selected.emit(emoji));
-		%EmojiGrid.add_child(button);
+		emoji_grid.add_child(button);
 	GlobalSettings.settings_changed.connect(_apply_settings);
 	_apply_settings();
 
 func _apply_settings() -> void:
-	for button : Button in %EmojiGrid.get_children():
+	if (_applied_font == GlobalSettings.default_emoji_font):
+		return;
+	_applied_font = GlobalSettings.default_emoji_font;
+	for button : Button in emoji_grid.get_children():
 		button.add_theme_font_override("font", GlobalSettings.default_emoji_font);
 
 func show_panel() -> void:

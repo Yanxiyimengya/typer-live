@@ -1,8 +1,7 @@
 extends Control;
 
-var fading_animation_player: AnimationPlayer = null;
-var dialog_bubble : DialogBubble = null;
-
+@onready var fading_animation_player : AnimationPlayer = %FadingAnimationPlayer;
+@onready var dialog_bubble : DialogBubble = %DialogBubble;
 var fade_out_time : float = GlobalSettings.DEFAULT_FADE_OUT_TIME;
 var _fade_out_timer : float = 0.0;
 var _fading : bool = false;
@@ -11,8 +10,6 @@ const FADE_IN_ANIM : StringName = &"fade_in";
 const FADE_OUT_ANIM : StringName = &"fade_out";
 
 func _ready() -> void:
-	dialog_bubble = self.get_node("%DialogBubble");
-	fading_animation_player = self.get_node("%FadingAnimationPlayer");
 	fading_animation_player.set_root("%AnimTranslate");
 	GlobalSettings.settings_changed.connect(_apply_settings);
 	_apply_settings();

@@ -19,7 +19,10 @@ var _start_mouse : Vector2;
 var _start_data : Dictionary;
 var _center : Vector2;
 
-@onready var preview : Control = $ViewportContainer/SubViewport/DialogBubble;
+@onready var preview : Control = %DialogBubble;
+
+@onready var viewport_container : SubViewportContainer = %ViewportContainer;
+@onready var overlay : Control = %Overlay;
 
 func _ready() -> void:
 	resized.connect(_layout_canvas);
@@ -28,27 +31,27 @@ func _ready() -> void:
 func _layout_canvas() -> void:
 	_display_scale = maxf(0.1, minf((size.x - 64.0) / SCENE_SIZE.x, (size.y - 64.0) / SCENE_SIZE.y)) * zoom;
 	_origin = (size - SCENE_SIZE * _display_scale) / 2.0 + _pan + Vector2(12, 12);
-	$ViewportContainer.position = _origin;
-	$ViewportContainer.scale = Vector2.ONE * _display_scale;
+	viewport_container.position = _origin;
+	viewport_container.scale = Vector2.ONE * _display_scale;
 	queue_redraw();
-	if (is_instance_valid(get_node_or_null("Overlay"))):
-		$Overlay.queue_redraw();
+	if (is_instance_valid(overlay)):
+		overlay.queue_redraw();
 
 func set_items(value : Array) -> void:
 	items = value.duplicate(true);
 	preview.apply_item_decorations(items);
 	queue_redraw();
-	if (is_instance_valid(get_node_or_null("Overlay"))):
-		$Overlay.queue_redraw();
+	if (is_instance_valid(overlay)):
+		overlay.queue_redraw();
 
 func select(index : int) -> void:
 	selected_index = index;
 	queue_redraw();
-	if (is_instance_valid(get_node_or_null("Overlay"))):
-		$Overlay.queue_redraw();
+	if (is_instance_valid(overlay)):
+		overlay.queue_redraw();
 
 func _item() -> Control:
-	return preview.get_node("DecorationItemsLayer").get_child(selected_index);
+	return preview.decoration_items_layer.get_child(selected_index);
 
 func _corners() -> PackedVector2Array:
 	var item : Control = _item();
@@ -167,7 +170,7 @@ func _gui_input(event : InputEvent) -> void:
 				var picked : int = -1;
 				var scene_point : Vector2 = (event.position - _origin) / _display_scale;
 				for index in range(items.size() - 1, -1, -1):
-					var item : Control = preview.get_node("DecorationItemsLayer").get_child(index);
+					var item : Control = preview.decoration_items_layer.get_child(index);
 					if (item.visible && Rect2(Vector2.ZERO, item.size).has_point(item.get_global_transform().affine_inverse() * scene_point)):
 						picked = index;
 						break;

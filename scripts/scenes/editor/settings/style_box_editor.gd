@@ -14,15 +14,18 @@ var data : Dictionary;
 var _fields : Dictionary = {};
 var _loading : bool = false;
 
+@onready var reset_style_button : Button = %ResetStyleButton;
+@onready var browse_button : Button = %BrowseButton;
+
 func _ready() -> void:
 	defaults = (GlobalSettings.DEFAULT_SENDER_STYLE if edit_sender else GlobalSettings.DEFAULT_BUBBLE_STYLE).duplicate(true);
 	mode_button.get_popup().theme = get_window().theme;
 	file_dialog.theme = get_window().theme;
 	mode_button.item_selected.connect(func(index : int): _update("mode", index));
-	%ResetStyleButton.pressed.connect(func(): set_data(defaults); style_changed.emit());
+	reset_style_button.pressed.connect(func(): set_data(defaults); style_changed.emit());
 	path_edit.text_submitted.connect(func(_text : String): _update("texture_path", path_edit.text));
 	path_edit.focus_exited.connect(func(): _update("texture_path", path_edit.text));
-	%BrowseButton.pressed.connect(file_dialog.popup_centered.bind(Vector2i(900, 600)));
+	browse_button.pressed.connect(file_dialog.popup_centered.bind(Vector2i(900, 600)));
 	file_dialog.file_selected.connect(func(path : String): path_edit.text = path; _update("texture_path", path));
 	for control : Node in find_children("*", "", true, false):
 		if (not control.has_meta("style_key")):

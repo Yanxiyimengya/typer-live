@@ -5,6 +5,9 @@ signal print_char(char : String);
 
 const DECORATION_ITEM : PackedScene = preload("res://scenes/live/dialog/decoration_item.tscn");
 var _decoration_items : Array = [];
+var _applied_fonts : Array = [];
+var _body_style : Dictionary = {};
+var _sender_style : Dictionary = {};
 
 @export_multiline() var text : String = "";
 @export var delay : float = 1;
@@ -17,10 +20,9 @@ var _progress : int = 0;
 var _print_timer : float = 0.0;
 var _han_regex : RegEx = RegEx.create_from_string("\\p{Han}");
 
-var dialog_text_label : RichTextLabel = null;
-var sender_text_label : RichTextLabel = null;
-var continue_indicator : Control = null;
-
+@onready var dialog_text_label : RichTextLabel = %DialogTextLabel;
+@onready var sender_text_label : RichTextLabel = %SenderTextLabel;
+@onready var continue_indicator : Control = %ContinueIndicator;
 const INNER_BBCODE: PackedStringArray = [
 	# 基础样式
 	"b", "i", "u", "s", "code",
@@ -42,12 +44,13 @@ const INNER_BBCODE: PackedStringArray = [
 	"pulse", "wave", "tornado", "shake", "fade", "rainbow"
 ]
 
+@onready var decoration_items_layer : Control = %DecorationItemsLayer;
+@onready var panel_container : PanelContainer = %PanelContainer;
+@onready var sender_panel_container : PanelContainer = %SenderPanelContainer;
+
 func _ready() -> void:
-	dialog_text_label = self.get_node("%DialogTextLabel");
-	sender_text_label = self.get_node("%SenderTextLabel");
-	continue_indicator = self.get_node("%ContinueIndicator");
 	resized.connect(_layout_decorations);
-	$DecorationItemsLayer.item_rect_changed.connect(_layout_decorations);
+	decoration_items_layer.item_rect_changed.connect(_layout_decorations);
 	var pulse : Tween = create_tween().set_loops();
 	pulse.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT);
 	pulse.tween_property(continue_indicator, "modulate:a", 0.35, 0.8);
@@ -65,29 +68,38 @@ func _apply_settings() -> void:
 	apply_bubble_styles(GlobalSettings.bubble_style, GlobalSettings.sender_style);
 	apply_item_decorations(GlobalSettings.decoration_items);
 	dialog_text_label.add_theme_color_override("default_color", font_color);
+	var font_settings : Array = [font, GlobalSettings.default_emoji_font, font_size];
+	if (_applied_fonts == font_settings):
+		return;
+	_applied_fonts = font_settings;
 	for label : RichTextLabel in [dialog_text_label, sender_text_label]:
+		label.remove_theme_font_override("normal_font");
+		var base_font : Font = font if font != null else label.get_theme_font("normal_font");
 		for style : String in ["normal", "bold", "italics", "bold_italics"]:
 			label.remove_theme_font_override(style + "_font");
-			var base_font : Font = font if font != null else label.get_theme_font(style + "_font");
-			label.add_theme_font_override(style + "_font", GlobalSettings.with_emoji_font(base_font));
+			label.add_theme_font_override(style + "_font", GlobalSettings.with_emoji_font(base_font, style));
 			label.add_theme_font_size_override(style + "_font_size", font_size);
 
 func apply_bubble_styles(body : Dictionary, sender : Dictionary) -> void:
-	get_node("VBoxContainer/PanelContainer").add_theme_stylebox_override("panel", GlobalSettings.make_style(body));
-	get_node("VBoxContainer/SenderPanelContainer").add_theme_stylebox_override("panel", GlobalSettings.make_style(sender));
-	var decorations : bool = body.get("decorations", true);
-
+	if (_body_style != body):
+		_body_style = body.duplicate(true);
+		panel_container.add_theme_stylebox_override("panel", GlobalSettings.make_style(body));
+	if (_sender_style != sender):
+		_sender_style = sender.duplicate(true);
+		sender_panel_container.add_theme_stylebox_override("panel", GlobalSettings.make_style(sender));
+	
 func apply_item_decorations(items : Array) -> void:
+	if (_decoration_items == items):
+		return;
 	_decoration_items = items.duplicate(true);
-	var layer : Control = %DecorationItemsLayer;
-	while layer.get_child_count() > items.size():
-		var item : Node = layer.get_child(layer.get_child_count() - 1);
-		layer.remove_child(item);
+	while decoration_items_layer.get_child_count() > items.size():
+		var item : Node = decoration_items_layer.get_child(decoration_items_layer.get_child_count() - 1);
+		decoration_items_layer.remove_child(item);
 		item.queue_free();
-	while layer.get_child_count() < items.size():
-		layer.add_child(DECORATION_ITEM.instantiate());
+	while decoration_items_layer.get_child_count() < items.size():
+		decoration_items_layer.add_child(DECORATION_ITEM.instantiate());
 	for index in range(items.size()):
-		var item : TextureRect = layer.get_child(index);
+		var item : TextureRect = decoration_items_layer.get_child(index);
 		item.texture = GlobalResourceLoader.load_image(items[index].path);
 		item.visible = items[index].get("visible", true);
 	_layout_decorations();
@@ -95,12 +107,12 @@ func apply_item_decorations(items : Array) -> void:
 func _layout_decorations() -> void:
 	for index in range(_decoration_items.size()):
 		var data : Dictionary = _decoration_items[index];
-		var item : TextureRect = %DecorationItemsLayer.get_child(index);
+		var item : TextureRect = decoration_items_layer.get_child(index);
 		item.size = data.size;
 		item.pivot_offset = item.size / 2.0;
 		item.scale = data.scale;
 		item.rotation_degrees = data.rotation;
-		item.position = size * data.anchor + data.position - %DecorationItemsLayer.position;
+		item.position = size * data.anchor + data.position - decoration_items_layer.position;
 
 func _process(delta: float) -> void:
 	continue_indicator.visible = not text.is_empty() && is_completed();

@@ -103,12 +103,14 @@ tab_0/title = "主气泡"
 tab_1/title = "姓名牌"
 
 [node name="BodyEditor" parent="Styles/StyleTabs" unique_id=19215619 instance=ExtResource("2_inspector")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 metadata/_tab_name = "主气泡"
 metadata/_tab_index = 0
 
 [node name="SenderEditor" parent="Styles/StyleTabs" unique_id=578245749 instance=ExtResource("2_inspector")]
+unique_name_in_owner = true
 layout_mode = 2
 edit_sender = true
 metadata/_tab_name = "姓名牌"
@@ -186,6 +188,7 @@ size = Vector2i(340, 260)
 render_target_update_mode = 0
 
 [node name="DialogBubble" parent="Styles/PreviewColumn/Frame/AspectRatioContainer/SubViewportContainer/SubViewport" unique_id=596785223 instance=ExtResource("3_preview")]
+unique_name_in_owner = true
 
 [node name="DialogTextLabel" parent="Styles/PreviewColumn/Frame/AspectRatioContainer/SubViewportContainer/SubViewport/DialogBubble/VBoxContainer/PanelContainer/VBoxContainer" parent_id_path=PackedInt32Array(596785223, 1871255080) index="0" unique_id=1826978105]
 text = "气泡样式测试。
@@ -193,6 +196,7 @@ text = "气泡样式测试。
 "
 
 [node name="Decorations" parent="." unique_id=1247228989 instance=ExtResource("6_decorations")]
+unique_name_in_owner = true
 layout_mode = 2
 metadata/_tab_name = "物件装饰"
 metadata/_tab_index = 1

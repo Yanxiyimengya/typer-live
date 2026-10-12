@@ -13,6 +13,7 @@ const DEFAULT_VOICE_PATH : String = "res://assets/audios/voices/voice.mp3";
 const DEFAULT_VOICE_VOLUME : float = 100.0;
 const DEFAULT_FADE_OUT_TIME : float = 2.0;
 const DEFAULT_SENDER_NAME : String = "忆梦";
+const DEFAULT_TTS_SETTINGS : Dictionary = {"enabled": false, "voice": "", "volume": 100, "rate": 1.0};
 const DEFAULT_BUBBLE_STYLE : Dictionary = {
 	"mode": 0, "background": Color(0.20, 0.13, 0.25, 0.96),
 	"border_color": Color(1, 0.81, 0.87, 0.96), "border_width": 2, "radius": 24,
@@ -41,6 +42,7 @@ var fade_out_time : float = DEFAULT_FADE_OUT_TIME;
 var sender_name : String = DEFAULT_SENDER_NAME;
 var default_font : Font;
 var default_emoji_font : Font;
+var tts_settings : Dictionary = DEFAULT_TTS_SETTINGS.duplicate(true);
 var default_voice : AudioStream;
 var live_window_size : Vector2i = Vector2i(800, 300);
 var live_window_position : Vector2i = Vector2i.ZERO;
@@ -48,6 +50,9 @@ var has_live_window_rect : bool = false;
 var bubble_style : Dictionary = DEFAULT_BUBBLE_STYLE.duplicate(true);
 var sender_style : Dictionary = DEFAULT_SENDER_STYLE.duplicate(true);
 var decoration_items : Array = [];
+var _emoji_font_cache : Dictionary = {};
+var _cached_emoji_font : Font;
+var _font_file_cache : Dictionary = {};
 
 func _ready() -> void:
 	load_settings();
@@ -59,10 +64,20 @@ func load_font(path : String, family : String = "") -> Font:
 		return system_font;
 	if (path.begins_with("res://")):
 		return load(path) as Font if ResourceLoader.exists(path) else null;
+	var file : FileAccess = FileAccess.open(path, FileAccess.READ) if FileAccess.file_exists(path) else null;
+	if (file == null):
+		_font_file_cache.erase(path);
+		return null;
+	var stamp : Vector2i = Vector2i(FileAccess.get_modified_time(path), file.get_length());
+	file.close();
+	if (_font_file_cache.has(path) && _font_file_cache[path].stamp == stamp):
+		return _font_file_cache[path].font;
 	var result : FontFile = FontFile.new();
-	if (FileAccess.file_exists(path)) : 
-		return result if (result.load_dynamic_font(path)) == OK else null;
-	return null;
+	if (result.load_dynamic_font(path) != OK):
+		_font_file_cache.erase(path);
+		return null;
+	_font_file_cache[path] = {"stamp": stamp, "font": result};
+	return result;
 
 func load_voice(path : String) -> AudioStream:
 	if (path.is_empty()):
@@ -79,19 +94,35 @@ func load_emoji_font(path : String) -> Font:
 	var custom : Font = load_font(path) if not path.is_empty() else null;
 	return custom if custom != null else BUNDLED_EMOJI_FONT;
 
-func with_emoji_font(base_font : Font) -> Font:
+func with_emoji_font(base_font : Font, style : String = "normal") -> Font:
 	if (base_font == null || default_emoji_font == null):
 		return base_font;
+	if (_cached_emoji_font != default_emoji_font):
+		_emoji_font_cache.clear();
+		_cached_emoji_font = default_emoji_font;
+	if (not _emoji_font_cache.has(base_font)):
+		_emoji_font_cache[base_font] = {};
+	if (_emoji_font_cache[base_font].has(style)):
+		return _emoji_font_cache[base_font][style];
 	var combined : FontVariation = FontVariation.new();
 	combined.base_font = base_font;
+	if (style in ["bold", "bold_italics"]):
+		combined.variation_embolden = 1.2;
+	if (style in ["italics", "bold_italics"]):
+		combined.variation_transform = Transform2D(Vector2(1.0, 0.0), Vector2(-0.2, 1.0), Vector2.ZERO);
 	var fallbacks : Array[Font] = [default_emoji_font];
 	for fallback : Font in base_font.fallbacks:
 		if (fallback != default_emoji_font):
 			fallbacks.append(fallback);
 	combined.fallbacks = fallbacks;
+	_emoji_font_cache[base_font][style] = combined;
 	return combined;
 
+func normalize_tts_settings(value : Dictionary) -> Dictionary:
+	return {"enabled": bool(value.get("enabled", false)), "voice": str(value.get("voice", "")), "volume": clampi(int(value.get("volume", 100)), 0, 100), "rate": clampf(float(value.get("rate", 1.0)), 0.5, 2.0)};
+
 func load_settings() -> void:
+	_font_file_cache.clear();
 	var config : ConfigFile = ConfigFile.new();
 	if (config.load(SAVE_PATH) == OK):
 		font_path = str(config.get_value("font", "path", font_path));
@@ -105,6 +136,7 @@ func load_settings() -> void:
 		voice_volume = clampf(float(config.get_value("general", "voice_volume", DEFAULT_VOICE_VOLUME)), 0.0, 100.0);
 		fade_out_time = maxf(float(config.get_value("general", "fade_out_time", DEFAULT_FADE_OUT_TIME)), 0.0);
 		sender_name = str(config.get_value("general", "sender_name", DEFAULT_SENDER_NAME));
+		tts_settings = normalize_tts_settings(config.get_value("general", "tts", DEFAULT_TTS_SETTINGS));
 		has_live_window_rect = config.has_section_key("live_window", "position");
 		live_window_size = config.get_value("live_window", "size", Vector2i(800, 300));
 		live_window_position = config.get_value("live_window", "position", Vector2i.ZERO);
@@ -146,14 +178,23 @@ func cleanup_decoration_images() -> void:
 		references.append_array(editor.get_data());
 	DECORATION_IMAGES.collect_unused(references);
 
-func apply_settings(path : String, size : int, color : Color, sound_path : String, family : String = "", body_style : Dictionary = {}, name_style : Dictionary = {}, stay_time : float = -1.0, speaker : Variant = null, sound_volume : float = -1.0, items : Variant = null, emoji_path : Variant = null) -> Error:
+func apply_settings(path : String, size : int, color : Color, sound_path : String, family : String = "", body_style : Dictionary = {}, name_style : Dictionary = {}, stay_time : float = -1.0, speaker : Variant = null, sound_volume : float = -1.0, items : Variant = null, emoji_path : Variant = null, tts_options : Variant = null) -> Error:
+	var new_tts : Dictionary = normalize_tts_settings(tts_settings if tts_options == null else tts_options);
 	var new_emoji_path : String = emoji_font_path if emoji_path == null else str(emoji_path).strip_edges();
-	var new_emoji_font : Font = load_font(new_emoji_path) if not new_emoji_path.is_empty() else BUNDLED_EMOJI_FONT;
+	var new_emoji_font : Font = BUNDLED_EMOJI_FONT;
+	if (not new_emoji_path.is_empty()):
+		if (not FileAccess.file_exists(new_emoji_path)):
+			return ERR_FILE_CANT_OPEN;
+		new_emoji_font = load_font(new_emoji_path);
 	if (new_emoji_font == null):
 		return ERR_FILE_CANT_OPEN;
 	var new_items : Array = (decoration_items if items == null else items).duplicate(true);
+	var imported_paths : Dictionary = {};
 	for item : Dictionary in new_items:
-		var stored : String = DECORATION_IMAGES.import_image(item.get("path", ""));
+		var original : String = item.get("path", "");
+		if (not imported_paths.has(original)):
+			imported_paths[original] = DECORATION_IMAGES.import_image(original);
+		var stored : String = imported_paths[original];
 		if (stored.is_empty()):
 			return ERR_CANT_CREATE;
 		item.path = stored;
@@ -165,8 +206,10 @@ func apply_settings(path : String, size : int, color : Color, sound_path : Strin
 		body_style = bubble_style;
 	if (name_style.is_empty()):
 		name_style = sender_style;
-	var new_font : Font = load_font(path, family);
-	var new_voice : AudioStream = load_voice(sound_path);
+	var new_font : Font = default_font if not family.is_empty() && family == font_family else load_font(path, family);
+	var new_voice : AudioStream = default_voice if sound_path == voice_path else load_voice(sound_path);
+	var items_changed : bool = new_items != decoration_items;
+	var changed : bool = path != font_path || family != font_family || new_emoji_path != emoji_font_path || new_emoji_font != default_emoji_font || new_font != default_font || clampi(size, 1, 200) != font_size || color != font_color || sound_path != voice_path || sound_volume != voice_volume || stay_time != fade_out_time || new_sender != sender_name || new_tts != tts_settings || body_style != bubble_style || name_style != sender_style || items_changed;
 	var config : ConfigFile = ConfigFile.new();
 	config.load(SAVE_PATH);
 	config.set_value("font", "path", path);
@@ -178,6 +221,7 @@ func apply_settings(path : String, size : int, color : Color, sound_path : Strin
 	config.set_value("general", "fade_out_time", stay_time);
 	config.set_value("general", "sender_name", new_sender);
 	config.set_value("general", "emoji_font_path", new_emoji_path);
+	config.set_value("general", "tts", new_tts);
 	if (config.has_section_key("font", "voice_path")):
 		config.erase_section_key("font", "voice_path");
 	config.set_value("bubble", "body", body_style);
@@ -190,6 +234,7 @@ func apply_settings(path : String, size : int, color : Color, sound_path : Strin
 	font_family = family;
 	emoji_font_path = new_emoji_path;
 	default_emoji_font = new_emoji_font;
+	tts_settings = new_tts;
 	font_size = clampi(size, 1, 200);
 	font_color = color;
 	voice_path = sound_path;
@@ -201,8 +246,10 @@ func apply_settings(path : String, size : int, color : Color, sound_path : Strin
 	bubble_style = body_style.duplicate(true);
 	sender_style = name_style.duplicate(true);
 	decoration_items = new_items.duplicate(true);
-	settings_changed.emit();
-	cleanup_decoration_images();
+	if (changed):
+		settings_changed.emit();
+	if (items_changed):
+		cleanup_decoration_images();
 	return OK;
 
 func save_live_window(size : Vector2i, position : Vector2i) -> Error:

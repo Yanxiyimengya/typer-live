@@ -1,10 +1,8 @@
 extends PanelContainer;
 
 var changer_func : Callable;
-var color_picker: ColorPicker;
-
+@onready var color_picker : ColorPicker = %ColorPicker;
 func _ready() -> void:
-	color_picker = self.get_node("%ColorPicker");
 	color_picker.color_changed.connect(_on_color_changed);
 
 func show_picker() -> void :
