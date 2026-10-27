@@ -63,6 +63,7 @@ func _ready() -> void:
 		setting_button.pressed.connect(_show_settings);
 	
 	send_button.pressed.connect(_on_send_button);
+	text_edit.gui_input.connect(_on_text_edit_gui_input);
 	reset_button.pressed.connect(_on_reset_button)
 	
 	# 文字颜色选择
@@ -131,6 +132,24 @@ func _apply_settings() -> void:
 		_applied_emoji_font = GlobalSettings.default_emoji_font;
 		text_edit.remove_theme_font_override("font");
 		text_edit.add_theme_font_override("font", GlobalSettings.with_emoji_font(text_edit.get_theme_font("font")));
+
+func _on_text_edit_gui_input(event : InputEvent) -> void:
+	if (not event is InputEventKey):
+		return;
+	if (not event.pressed):
+		return;
+	if (event.keycode != KEY_ENTER && event.keycode != KEY_KP_ENTER):
+		return;
+	# 输入法正在组词时，让回车正常确认候选文字。
+	if (text_edit.has_ime_text()):
+		return;
+	text_edit.accept_event();
+	if (event.echo):
+		return;
+	if (event.shift_pressed):
+		text_edit.insert_text_at_caret("\n");
+	else:
+		_on_send_button();
 
 func _on_send_button() -> void : 
 	var text : String = text_edit.text;
